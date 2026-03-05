@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SplitAI — Smart Expense Splitting</title>
+  <meta name="description" content="Split expenses with friends using AI. Voice input, receipt scanning, offline mode, multi-currency. Free on iOS.">
+  <meta property="og:title" content="SplitAI — Smart Expense Splitting">
+  <meta property="og:description" content="The smartest way to split expenses with friends. AI voice input, offline mode, multi-currency. Join the beta.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --bg:#050a0e;
+      --surface:rgba(255,255,255,0.03);
+      --surface-hover:rgba(255,255,255,0.06);
+      --border:rgba(255,255,255,0.06);
+      --border-hover:rgba(255,255,255,0.12);
+      --text:#f0f2f5;
+      --text-secondary:rgba(255,255,255,0.5);
+      --text-tertiary:rgba(255,255,255,0.3);
+      --accent:#2dd47b;
+      --accent-dim:rgba(45,212,123,0.15);
+      --accent-glow:rgba(45,212,123,0.4);
+      --blue:#5b9cf5;
+      --purple:#a78bfa;
+      --orange:#f59e42;
+      --pink:#f472b6;
+      --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+      --mono:'JetBrains Mono',monospace;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:var(--sans);
+      line-height:1.6;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    /* ── Background orbs ── */
+    .bg-orbs{
+      position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
+    }
+    .orb{
+      position:absolute;border-radius:50%;filter:blur(120px);opacity:0.35;
+      animation:float 20s ease-in-out infinite alternate;
+    }
+    .orb-1{width:600px;height:600px;background:radial-gradient(circle,#2dd47b,transparent 70%);top:-10%;left:-10%;animation-duration:25s}
+    .orb-2{width:500px;height:500px;background:radial-gradient(circle,#5b9cf5,transparent 70%);top:30%;right:-15%;animation-duration:30s;animation-delay:-5s}
+    .orb-3{width:400px;height:400px;background:radial-gradient(circle,#a78bfa,transparent 70%);bottom:-5%;left:30%;animation-duration:22s;animation-delay:-10s}
+    @keyframes float{
+      0%{transform:translate(0,0) scale(1)}
+      33%{transform:translate(30px,-40px) scale(1.05)}
+      66%{transform:translate(-20px,30px) scale(0.95)}
+      100%{transform:translate(10px,-20px) scale(1.02)}
+    }
+
+    /* ── Noise texture ── */
+    body::before{
+      content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+      opacity:0.025;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ── Layout ── */
+    .wrapper{position:relative;z-index:2}
+    .container{max-width:1080px;margin:0 auto;padding:0 24px}
+    section{padding:100px 0}
+
+    /* ── Nav ── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      padding:16px 24px;
+      background:rgba(5,10,14,0.7);
+      backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:center;
+    }
+    .nav-inner{
+      max-width:1080px;width:100%;display:flex;align-items:center;justify-content:space-between;
+    }
+    .nav-brand{
+      display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);
+    }
+    .nav-brand img{width:32px;height:32px;border-radius:8px}
+    .nav-brand span{font-weight:700;font-size:18px;letter-spacing:-0.02em}
+    .nav-badge{
+      font-size:11px;font-weight:600;color:var(--accent);
+      background:var(--accent-dim);
+      padding:2px 8px;border-radius:20px;margin-left:4px;
+    }
+    .nav-right{display:flex;align-items:center;gap:12px}
+    .lang-switcher{display:flex;gap:2px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2px}
+    .lang-btn{
+      background:none;border:none;color:var(--text-secondary);
+      padding:5px 10px;border-radius:6px;font-size:13px;font-weight:600;
+      cursor:pointer;transition:all .2s;font-family:var(--sans);
+    }
+    .lang-btn:hover{color:var(--text)}
+    .lang-btn.active{background:var(--accent);color:#050a0e}
+    .nav-cta{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--accent);color:#050a0e;
+      padding:8px 20px;border-radius:8px;
+      font-size:14px;font-weight:600;text-decoration:none;
+      transition:all .2s;border:none;cursor:pointer;
+    }
+    .nav-cta:hover{box-shadow:0 0 24px var(--accent-glow);transform:translateY(-1px)}
+
+    /* ── Hero ── */
+    .hero{
+      padding-top:160px;padding-bottom:100px;text-align:center;
+    }
+    .hero-icon{
+      width:88px;height:88px;border-radius:22px;
+      box-shadow:0 0 60px var(--accent-glow),0 0 120px rgba(45,212,123,0.15);
+      margin-bottom:32px;
+      animation:pulse-glow 4s ease-in-out infinite;
+    }
+    @keyframes pulse-glow{
+      0%,100%{box-shadow:0 0 60px var(--accent-glow),0 0 120px rgba(45,212,123,0.1)}
+      50%{box-shadow:0 0 80px var(--accent-glow),0 0 160px rgba(45,212,123,0.2)}
+    }
+    .hero h1{
+      font-size:clamp(36px,6vw,64px);
+      font-weight:800;letter-spacing:-0.03em;
+      line-height:1.1;margin-bottom:20px;
+    }
+    .hero h1 .gradient{
+      background:linear-gradient(135deg,#2dd47b 0%,#5b9cf5 50%,#a78bfa 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .hero-sub{
+      font-size:clamp(16px,2.5vw,20px);
+      color:var(--text-secondary);
+      max-width:560px;margin:0 auto 40px;
+      line-height:1.6;
+    }
+    .hero-actions{
+      display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
+    }
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:10px;
+      background:var(--accent);color:#050a0e;
+      padding:14px 32px;border-radius:12px;
+      font-size:16px;font-weight:700;text-decoration:none;
+      transition:all .25s;border:none;cursor:pointer;
+      font-family:var(--sans);
+    }
+    .btn-primary:hover{
+      box-shadow:0 0 40px var(--accent-glow);
+      transform:translateY(-2px);
+    }
+    .btn-primary svg{width:20px;height:20px}
+    .btn-secondary{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--surface);color:var(--text);
+      padding:14px 28px;border-radius:12px;
+      font-size:16px;font-weight:600;text-decoration:none;
+      border:1px solid var(--border);
+      transition:all .25s;cursor:pointer;
+      font-family:var(--sans);
+    }
+    .btn-secondary:hover{border-color:var(--border-hover);background:var(--surface-hover)}
+    .hero-note{
+      margin-top:20px;color:var(--text-tertiary);font-size:13px;
+    }
+
+    /* ── Trusted / social proof ── */
+    .proof{
+      text-align:center;padding:40px 0 60px;
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+    }
+    .proof-label{
+      font-size:13px;color:var(--text-tertiary);text-transform:uppercase;
+      letter-spacing:0.1em;font-weight:600;margin-bottom:24px;
+    }
+    .proof-stats{
+      display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+    }
+    .proof-stat{text-align:center}
+    .proof-stat-value{
+      font-size:32px;font-weight:800;
+      background:linear-gradient(135deg,var(--accent),var(--blue));
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    }
+    .proof-stat-label{font-size:14px;color:var(--text-secondary);margin-top:4px}
+
+    /* ── Features grid ── */
+    .features-section h2{
+      text-align:center;font-size:clamp(28px,4vw,42px);font-weight:800;
+      letter-spacing:-0.02em;margin-bottom:16px;
+    }
+    .features-section .section-sub{
+      text-align:center;color:var(--text-secondary);font-size:17px;
+      max-width:480px;margin:0 auto 56px;
+    }
+    .features-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;
+    }
+    .feature-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:16px;padding:28px;
+      transition:all .3s;position:relative;overflow:hidden;
+    }
+    .feature-card::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(circle at top right,rgba(45,212,123,0.06),transparent 60%);
+      opacity:0;transition:opacity .3s;
+    }
+    .feature-card:hover{
+      border-color:var(--border-hover);
+      transform:translateY(-2px);
+      box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    }
+    .feature-card:hover::before{opacity:1}
+    .feature-emoji{font-size:28px;margin-bottom:16px;display:block}
+    .feature-title{
+      font-size:16px;font-weight:700;margin-bottom:8px;
+      display:flex;align-items:center;gap:8px;
+    }
+    .feature-title code{
+      font-family:var(--mono);font-size:12px;font-weight:500;
+      color:var(--accent);background:var(--accent-dim);
+      padding:2px 8px;border-radius:6px;
+    }
+    .feature-desc{color:var(--text-secondary);font-size:14px;line-height:1.6}
+
+    /* ── How it works ── */
+    .how-section{}
+    .how-section h2{
+      text-align:center;font-size:clamp(28px,4vw,42px);font-weight:800;
+      letter-spacing:-0.02em;margin-bottom:56px;
+    }
+    .steps{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;
+    }
+    .step-card{
+      text-align:center;padding:32px 24px;
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:16px;position:relative;
+    }
+    .step-num{
+      width:40px;height:40px;
+      background:linear-gradient(135deg,var(--accent),var(--blue));
+      border-radius:12px;display:flex;align-items:center;justify-content:center;
+      font-size:18px;font-weight:800;color:#050a0e;
+      margin:0 auto 16px;
+    }
+    .step-title{font-size:16px;font-weight:700;margin-bottom:8px}
+    .step-desc{font-size:14px;color:var(--text-secondary);line-height:1.6}
+    .step-arrow{
+      display:none;position:absolute;right:-18px;top:50%;
+      color:var(--text-tertiary);font-size:20px;
+    }
+    @media(min-width:900px){
+      .step-arrow{display:block}
+      .step-card:last-child .step-arrow{display:none}
+    }
+
+    /* ── Code block accent ── */
+    .code-section{
+      text-align:center;
+    }
+    .code-block{
+      display:inline-block;text-align:left;
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--border);
+      border-radius:16px;padding:28px 32px;
+      font-family:var(--mono);font-size:14px;
+      line-height:1.8;max-width:100%;overflow-x:auto;
+      white-space:pre;
+    }
+    .code-block .cm{color:var(--text-tertiary);font-style:italic}
+    .code-block .kw{color:var(--purple)}
+    .code-block .fn{color:var(--blue)}
+    .code-block .st{color:var(--orange)}
+    .code-block .ac{color:var(--accent)}
+    .code-block .pk{color:var(--pink)}
+
+    /* ── CTA bottom ── */
+    .cta-section{
+      text-align:center;
+    }
+    .cta-section h2{
+      font-size:clamp(28px,4vw,42px);font-weight:800;
+      letter-spacing:-0.02em;margin-bottom:16px;
+    }
+    .cta-section .section-sub{
+      color:var(--text-secondary);font-size:17px;
+      max-width:440px;margin:0 auto 40px;
+    }
+    .cta-actions{
+      display:flex;flex-direction:column;align-items:center;gap:16px;
+    }
+    .share-row{
+      display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
+    }
+    .share-link-box{
+      font-family:var(--mono);font-size:13px;
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:10px;padding:10px 16px;
+      color:var(--blue);cursor:pointer;
+      transition:all .2s;text-decoration:none;display:inline-block;
+    }
+    .share-link-box:hover{border-color:var(--blue)}
+    .copy-btn{
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:10px;padding:10px 16px;
+      color:var(--text-secondary);cursor:pointer;
+      font-family:var(--mono);font-size:13px;
+      transition:all .2s;
+    }
+    .copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .copy-btn.copied{border-color:var(--accent);color:var(--accent)}
+
+    /* ── Footer ── */
+    footer{
+      text-align:center;padding:40px 24px;
+      border-top:1px solid var(--border);
+      color:var(--text-tertiary);font-size:13px;
+    }
+    footer .tech{
+      font-family:var(--mono);font-size:12px;
+      color:var(--text-tertiary);margin-bottom:8px;
+    }
+
+    /* ── Responsive ── */
+    @media(max-width:640px){
+      .hero{padding-top:120px;padding-bottom:60px}
+      section{padding:60px 0}
+      .proof-stats{gap:32px}
+      .features-grid{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr}
+      .code-block{font-size:12px;padding:20px}
+    }
+
+    /* ── RTL ── */
+    html[dir="rtl"] .nav-inner,
+    html[dir="rtl"] .hero-actions,
+    html[dir="rtl"] .proof-stats,
+    html[dir="rtl"] .share-row{flex-direction:row-reverse}
+    html[dir="rtl"] .feature-title{direction:rtl}
+    html[dir="rtl"] .step-arrow{right:auto;left:-18px;transform:scaleX(-1)}
+    html[dir="rtl"] .hero-note{direction:rtl}
+
+    /* ── Animations ── */
+    .fade-up{
+      opacity:0;transform:translateY(30px);
+      transition:opacity .6s ease,transform .6s ease;
+    }
+    .fade-up.visible{opacity:1;transform:translateY(0)}
+  </style>
+</head>
+<body>
+  <!-- Background orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="wrapper">
+    <!-- Nav -->
+    <nav>
+      <div class="nav-inner">
+        <a class="nav-brand" href="#">
+          <img src="icon.png" alt="SplitAI">
+          <span>SplitAI</span>
+          <span class="nav-badge">Beta</span>
+        </a>
+        <div class="nav-right">
+          <div class="lang-switcher">
+            <button class="lang-btn active" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" onclick="setLang('ru')">RU</button>
+            <button class="lang-btn" onclick="setLang('he')">HE</button>
+          </div>
+          <a class="nav-cta" href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener" data-i18n="nav_cta">
+            Get the App
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero container">
+      <img class="hero-icon" src="icon.png" alt="SplitAI">
+      <h1 data-i18n-html="hero_title">Split expenses.<br><span class="gradient">Not friendships.</span></h1>
+      <p class="hero-sub" data-i18n="hero_sub">
+        AI-powered expense splitting for trips, dinners, and shared living.
+        Voice input, receipt scanning, offline mode — all free.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+          <span data-i18n="hero_cta">Join TestFlight Beta</span>
+        </a>
+        <a class="btn-secondary" href="#features" data-i18n="hero_features">
+          See Features
+        </a>
+      </div>
+      <p class="hero-note" data-i18n-html="hero_note">iOS only &middot; Free &middot; No ads &middot; 6 languages &middot; <a href="https://discord.gg/us3U2zTC" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">Discord</a></p>
+    </section>
+
+    <!-- Social proof -->
+    <section class="proof container">
+      <p class="proof-label" data-i18n="proof_label">Built for real trips</p>
+      <div class="proof-stats">
+        <div class="proof-stat">
+          <div class="proof-stat-value">6</div>
+          <div class="proof-stat-label" data-i18n="proof_languages">Languages</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-stat-value">&infin;</div>
+          <div class="proof-stat-label" data-i18n="proof_currencies">Currencies</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-stat-value">$0</div>
+          <div class="proof-stat-label" data-i18n="proof_price">Price</div>
+        </div>
+        <div class="proof-stat">
+          <div class="proof-stat-value">0</div>
+          <div class="proof-stat-label" data-i18n="proof_ads">Ads</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section container" id="features">
+      <h2 data-i18n-html="features_title">Everything you need to<br><span class="gradient">split fairly</span></h2>
+      <p class="section-sub" data-i18n="features_sub">No more spreadsheets, no more "I'll Venmo you later" that never happens.</p>
+      <div class="features-grid">
+        <div class="feature-card fade-up">
+          <span class="feature-emoji">&#127908;</span>
+          <div class="feature-title" data-i18n-html="f1_title">Voice Input <code>AI</code></div>
+          <div class="feature-desc" data-i18n="f1_desc">Just say "dinner 80 euros, split 4 ways" and the expense is created. Powered by OpenAI.</div>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-emoji">&#128247;</span>
+          <div class="feature-title" data-i18n-html="f2_title">Receipt Scanner <code>AI</code></div>
+          <div class="feature-desc" data-i18n="f2_desc">Snap a photo of any receipt. AI reads it and creates the expense automatically.</div>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-emoji">&#9992;&#65039;</span>
+          <div class="feature-title" data-i18n="f3_title">Works Offline</div>
+          <div class="feature-desc" data-i18n="f3_desc">On a plane? In the mountains? Add expenses anywhere. Syncs when you're back online.</div>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-emoji">&#128177;</span>
+          <div class="feature-title" data-i18n="f4_title">Multi-Currency</div>
+          <div class="feature-desc" data-i18n="f4_desc">EUR, USD, ILS, GBP — any currency. Auto-converts with live exchange rates.</div>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-emoji">&#128101;</span>
+          <div class="feature-title" data-i18n="f5_title">Flexible Splits</div>
+          <div class="feature-desc" data-i18n="f5_desc">Split equally, by exact amounts, percentages, or with multiple payers. Your call.</div>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-emoji">&#128202;</span>
+          <div class="feature-title" data-i18n="f6_title">Analytics</div>
+          <div class="feature-desc" data-i18n="f6_desc">See where the money goes. Charts by category, trends over time, spending insights.</div>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-emoji">&#128276;</span>
+          <div class="feature-title" data-i18n="f7_title">Push Notifications</div>
+          <div class="feature-desc" data-i18n="f7_desc">Know instantly when someone adds an expense, settles a debt, or goes over budget.</div>
+        </div>
+        <div class="feature-card fade-up">
+          <span class="feature-emoji">&#128230;</span>
+          <div class="feature-title" data-i18n="f8_title">Export Reports</div>
+          <div class="feature-desc" data-i18n="f8_desc">Download your group expenses as PDF or Excel. Fully localized in your language.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="how-section container">
+      <h2 data-i18n-html="steps_title">Get started in <span class="gradient">4 steps</span></h2>
+      <div class="steps">
+        <div class="step-card fade-up">
+          <div class="step-num">1</div>
+          <div class="step-title" data-i18n="s1_title">Install</div>
+          <div class="step-desc" data-i18n="s1_desc">Tap the button to get SplitAI via TestFlight. Takes 30 seconds.</div>
+          <span class="step-arrow">&rarr;</span>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-num">2</div>
+          <div class="step-title" data-i18n="s2_title">Create a Group</div>
+          <div class="step-desc" data-i18n="s2_desc">Name it after your trip or flat. Share the invite link with friends.</div>
+          <span class="step-arrow">&rarr;</span>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-num">3</div>
+          <div class="step-title" data-i18n="s3_title">Add Expenses</div>
+          <div class="step-desc" data-i18n="s3_desc">Type, speak, or scan a receipt. Pick how to split it.</div>
+          <span class="step-arrow">&rarr;</span>
+        </div>
+        <div class="step-card fade-up">
+          <div class="step-num">4</div>
+          <div class="step-title" data-i18n="s4_title">Settle Up</div>
+          <div class="step-desc" data-i18n="s4_desc">App calculates who owes who. Mark payments when done.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="cta-section container">
+      <h2 data-i18n-html="cta_title">Ready to <span class="gradient">stop guessing?</span></h2>
+      <p class="section-sub" data-i18n="cta_sub">Join the beta. Share the link with your group. Never argue about money again.</p>
+      <div class="cta-actions">
+        <a class="btn-primary" href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          <span data-i18n="cta_download">Download on TestFlight</span>
+        </a>
+        <div class="share-row">
+          <a class="share-link-box" href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">testflight.apple.com/join/HBdzGyGA</a>
+          <button class="copy-btn" onclick="copyLink(this)" data-i18n="copy_link">Copy link</button>
+        </div>
+        <a class="btn-secondary" href="https://discord.gg/us3U2zTC" target="_blank" rel="noopener" style="margin-top:8px" data-i18n-html="discord_btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+          Join Discord — Feedback &amp; Updates
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p class="tech">React Native &middot; Expo &middot; Supabase &middot; OpenAI</p>
+      <p data-i18n="footer">SplitAI &copy; 2026</p>
+    </footer>
+  </div>
+
+  <script>
+    const T={
+      en:{
+        nav_cta:"Get the App",
+        hero_title:'Split expenses.<br><span class="gradient">Not friendships.</span>',
+        hero_sub:"AI-powered expense splitting for trips, dinners, and shared living. Voice input, receipt scanning, offline mode — all free.",
+        hero_cta:"Join TestFlight Beta",
+        hero_features:"See Features",
+        hero_note:'iOS only &middot; Free &middot; No ads &middot; 6 languages &middot; <a href="https://discord.gg/us3U2zTC" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">Discord</a>',
+        proof_label:"Built for real trips",
+        proof_languages:"Languages",proof_currencies:"Currencies",proof_price:"Price",proof_ads:"Ads",
+        features_title:'Everything you need to<br><span class="gradient">split fairly</span>',
+        features_sub:'No more spreadsheets, no more "I\'ll Venmo you later" that never happens.',
+        f1_title:'Voice Input <code>AI</code>',f1_desc:'Just say "dinner 80 euros, split 4 ways" and the expense is created. Powered by OpenAI.',
+        f2_title:'Receipt Scanner <code>AI</code>',f2_desc:"Snap a photo of any receipt. AI reads it and creates the expense automatically.",
+        f3_title:"Works Offline",f3_desc:"On a plane? In the mountains? Add expenses anywhere. Syncs when you're back online.",
+        f4_title:"Multi-Currency",f4_desc:"EUR, USD, ILS, GBP — any currency. Auto-converts with live exchange rates.",
+        f5_title:"Flexible Splits",f5_desc:"Split equally, by exact amounts, percentages, or with multiple payers. Your call.",
+        f6_title:"Analytics",f6_desc:"See where the money goes. Charts by category, trends over time, spending insights.",
+        f7_title:"Push Notifications",f7_desc:"Know instantly when someone adds an expense, settles a debt, or goes over budget.",
+        f8_title:"Export Reports",f8_desc:"Download your group expenses as PDF or Excel. Fully localized in your language.",
+        steps_title:'Get started in <span class="gradient">4 steps</span>',
+        s1_title:"Install",s1_desc:"Tap the button to get SplitAI via TestFlight. Takes 30 seconds.",
+        s2_title:"Create a Group",s2_desc:"Name it after your trip or flat. Share the invite link with friends.",
+        s3_title:"Add Expenses",s3_desc:"Type, speak, or scan a receipt. Pick how to split it.",
+        s4_title:"Settle Up",s4_desc:"App calculates who owes who. Mark payments when done.",
+        cta_title:'Ready to <span class="gradient">stop guessing?</span>',
+        cta_sub:"Join the beta. Share the link with your group. Never argue about money again.",
+        cta_download:"Download on TestFlight",
+        copy_link:"Copy link",copied:"Copied!",
+        discord_btn:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg> Join Discord — Feedback &amp; Updates',
+        footer:"SplitAI &copy; 2026"
+      },
+      ru:{
+        nav_cta:"Скачать",
+        hero_title:'Дели расходы.<br><span class="gradient">Не дружбу.</span>',
+        hero_sub:"Умное разделение расходов для поездок, ужинов и совместного проживания. Голосовой ввод, сканирование чеков, офлайн-режим — всё бесплатно.",
+        hero_cta:"Скачать в TestFlight",
+        hero_features:"Возможности",
+        hero_note:'Только iOS &middot; Бесплатно &middot; Без рекламы &middot; 6 языков &middot; <a href="https://discord.gg/us3U2zTC" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">Discord</a>',
+        proof_label:"Создано для реальных поездок",
+        proof_languages:"Языков",proof_currencies:"Валют",proof_price:"Цена",proof_ads:"Реклама",
+        features_title:'Всё что нужно для<br><span class="gradient">честного разделения</span>',
+        features_sub:"Никаких таблиц, никаких \"я переведу потом\", которые никогда не случаются.",
+        f1_title:'Голосовой ввод <code>AI</code>',f1_desc:'Просто скажите «ужин 80 евро, на 4 человека» — расход создан. На базе OpenAI.',
+        f2_title:'Сканер чеков <code>AI</code>',f2_desc:"Сфотографируйте чек. ИИ прочитает его и создаст расход автоматически.",
+        f3_title:"Работает офлайн",f3_desc:"В самолёте? В горах? Добавляйте расходы где угодно. Синхронизация при подключении.",
+        f4_title:"Мультивалюта",f4_desc:"EUR, USD, ILS, GBP — любая валюта. Авто-конвертация по актуальным курсам.",
+        f5_title:"Гибкое разделение",f5_desc:"Поровну, по суммам, процентам или с несколькими плательщиками. Как вам удобно.",
+        f6_title:"Аналитика",f6_desc:"Смотрите куда уходят деньги. Графики по категориям, тренды, статистика расходов.",
+        f7_title:"Уведомления",f7_desc:"Узнавайте сразу, когда кто-то добавил расход, погасил долг или превысил бюджет.",
+        f8_title:"Экспорт отчётов",f8_desc:"Скачивайте расходы группы в PDF или Excel. Полная локализация на вашем языке.",
+        steps_title:'Начните за <span class="gradient">4 шага</span>',
+        s1_title:"Установите",s1_desc:"Нажмите кнопку чтобы скачать SplitAI через TestFlight. Займёт 30 секунд.",
+        s2_title:"Создайте группу",s2_desc:"Назовите её как поездку или квартиру. Поделитесь ссылкой с друзьями.",
+        s3_title:"Добавьте расходы",s3_desc:"Введите, скажите голосом или сфотографируйте чек. Выберите как разделить.",
+        s4_title:"Рассчитайтесь",s4_desc:"Приложение считает кто кому должен. Отмечайте оплаты когда готово.",
+        cta_title:'Готовы <span class="gradient">перестать гадать?</span>',
+        cta_sub:"Присоединяйтесь к бете. Поделитесь ссылкой с группой. Больше никаких споров о деньгах.",
+        cta_download:"Скачать в TestFlight",
+        copy_link:"Скопировать",copied:"Скопировано!",
+        discord_btn:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg> Discord — Обратная связь',
+        footer:"SplitAI &copy; 2026"
+      },
+      he:{
+        nav_cta:"להורדה",
+        hero_title:'מחלקים הוצאות.<br><span class="gradient">לא חברויות.</span>',
+        hero_sub:"חלוקת הוצאות חכמה לטיולים, ארוחות ודיור משותף. קלט קולי, סריקת קבלות, מצב אופליין — הכל בחינם.",
+        hero_cta:"הורדה מ-TestFlight",
+        hero_features:"לתכונות",
+        hero_note:'iOS בלבד &middot; חינם &middot; ללא פרסומות &middot; 6 שפות &middot; <a href="https://discord.gg/us3U2zTC" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">Discord</a>',
+        proof_label:"נבנה לטיולים אמיתיים",
+        proof_languages:"שפות",proof_currencies:"מטבעות",proof_price:"מחיר",proof_ads:"פרסומות",
+        features_title:'כל מה שצריך כדי<br><span class="gradient">לחלק בהוגנות</span>',
+        features_sub:'בלי טבלאות, בלי "אעביר לך אחר כך" שאף פעם לא קורה.',
+        f1_title:'קלט קולי <code>AI</code>',f1_desc:'פשוט תגידו "ארוחת ערב 80 יורו, מחולק ל-4" וההוצאה נוצרת. מבוסס OpenAI.',
+        f2_title:'סורק קבלות <code>AI</code>',f2_desc:"צלמו קבלה. הבינה המלאכותית קוראת אותה ויוצרת את ההוצאה אוטומטית.",
+        f3_title:"עובד אופליין",f3_desc:"במטוס? בהרים? הוסיפו הוצאות בכל מקום. מסתנכרן כשחוזרים לרשת.",
+        f4_title:"רב-מטבעי",f4_desc:"EUR, USD, ILS, GBP — כל מטבע. המרה אוטומטית בשערים עדכניים.",
+        f5_title:"חלוקה גמישה",f5_desc:"בשווה, לפי סכומים, אחוזים או עם מספר משלמים. הבחירה שלכם.",
+        f6_title:"אנליטיקה",f6_desc:"ראו לאן הולך הכסף. גרפים לפי קטגוריה, מגמות לאורך זמן, תובנות הוצאות.",
+        f7_title:"התראות פוש",f7_desc:"דעו מיד כשמישהו מוסיף הוצאה, מסדיר חוב או חורג מהתקציב.",
+        f8_title:"ייצוא דוחות",f8_desc:"הורידו הוצאות קבוצה כ-PDF או Excel. מתורגם במלואו לשפה שלכם.",
+        steps_title:'התחילו ב-<span class="gradient">4 צעדים</span>',
+        s1_title:"התקינו",s1_desc:"לחצו על הכפתור להורדת SplitAI דרך TestFlight. לוקח 30 שניות.",
+        s2_title:"צרו קבוצה",s2_desc:"תנו לה שם לפי הטיול או הדירה. שתפו את הקישור עם חברים.",
+        s3_title:"הוסיפו הוצאות",s3_desc:"הקלידו, דברו או צלמו קבלה. בחרו איך לחלק.",
+        s4_title:"התחשבנו",s4_desc:"האפליקציה מחשבת מי חייב למי. סמנו תשלומים כשסיימתם.",
+        cta_title:'מוכנים <span class="gradient">להפסיק לנחש?</span>',
+        cta_sub:"הצטרפו לבטא. שתפו את הקישור עם הקבוצה. לא עוד ויכוחים על כסף.",
+        cta_download:"הורדה מ-TestFlight",
+        copy_link:"העתק קישור",copied:"הועתק!",
+        discord_btn:'<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg> Discord — משוב ועדכונים',
+        footer:"SplitAI &copy; 2026"
+      }
+    };
+
+    let curLang='en';
+
+    function setLang(lang){
+      curLang=lang;
+      const strings=T[lang];
+      // Update dir for RTL
+      document.documentElement.dir=lang==='he'?'rtl':'ltr';
+      document.documentElement.lang=lang;
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(b=>{
+        b.classList.toggle('active',b.textContent.trim()===lang.toUpperCase());
+      });
+      // Text content (no HTML)
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key=el.getAttribute('data-i18n');
+        if(strings[key])el.textContent=strings[key];
+      });
+      // HTML content
+      document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+        const key=el.getAttribute('data-i18n-html');
+        if(strings[key])el.innerHTML=strings[key];
+      });
+      // Update page title
+      document.title=lang==='ru'?'SplitAI — Умное разделение расходов':lang==='he'?'SplitAI — חלוקת הוצאות חכמה':'SplitAI — Smart Expense Splitting';
+      // Save preference
+      try{localStorage.setItem('lang',lang)}catch(e){}
+    }
+
+    // Copy link
+    function copyLink(btn){
+      navigator.clipboard.writeText('https://testflight.apple.com/join/HBdzGyGA').then(()=>{
+        btn.textContent=T[curLang].copied;btn.classList.add('copied');
+        setTimeout(()=>{btn.textContent=T[curLang].copy_link;btn.classList.remove('copied')},2000);
+      });
+    }
+
+    // Scroll fade-in
+    const observer=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}});
+    },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+    // Restore saved language
+    try{const saved=localStorage.getItem('lang');if(saved&&T[saved])setLang(saved)}catch(e){}
+  </script>
+</body>
+</html>

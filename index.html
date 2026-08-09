@@ -2,14 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>SplitAI — Split expenses. Not friendships.</title>
+<title>Ceru — Split expenses. Not friendships.</title>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<meta name="description" content="AI-powered expense splitting for trips, dinners, and shared living. Voice input, receipt scanning, offline mode — all free.">
-<meta property="og:title" content="SplitAI — Split expenses. Not friendships.">
-<meta property="og:site_name" content="SplitAI">
-<meta property="og:description" content="AI splits your dinner bill, your trip costs, your rent — by voice or photo. Free, offline-friendly, six languages.">
+<meta name="description" content="AI-powered expense splitting for trips, dinners, and shared living. Voice input, receipt scanning, offline mode, no ads.">
+<meta property="og:title" content="Ceru — Split expenses. Not friendships.">
+<meta property="og:site_name" content="Ceru">
+<meta property="og:description" content="AI splits your dinner bill, your trip costs, your rent — by voice or photo. No ads, offline-friendly, six languages.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ceru — split bills, not friendships">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ceru — Split expenses. Not friendships.">
+<meta name="twitter:description" content="AI splits your dinner bill, your trip costs, your rent — by voice or photo. No ads, offline-friendly, six languages.">
+<meta name="twitter:image" content="og.png">
+<meta name="theme-color" content="#0f0f10">
 <link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -457,8 +467,8 @@
 <nav class="nav">
   <div class="nav-inner">
     <a class="brand" href="#">
-      <img src="icon.png" class="brand-logo" alt="SplitAI">
-      <span class="brand-name">SplitAI</span>
+      <img src="icon.png" class="brand-logo" alt="Ceru">
+      <span class="brand-name">Ceru</span>
       <span class="badge-beta">Beta</span>
     </a>
     <div class="nav-links">
@@ -494,11 +504,7 @@
       Split expenses.<br>
       Not <span class="accent">friendships.</span>
     </h1>
-    <p class="hero-sub" data-i18n="hero_sub">
-      AI splits your dinner bill, your trip costs, your rent — by voice or photo.
-      Free, offline-friendly, six languages. Built for groups that actually
-      go places together.
-    </p>
+    <p class="hero-sub" data-i18n="hero_sub">AI splits your dinner bill, your trip costs, your rent — by voice or photo. No ads, offline-friendly, six languages. Built for groups that actually go places together.</p>
     <div class="hero-actions">
       <a href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
         <button class="btn btn-primary btn-large">
@@ -513,7 +519,7 @@
     <div class="stats">
       <div><div class="stat-v">6</div><div class="stat-l" data-i18n="stat_lang">Languages</div></div>
       <div><div class="stat-v">&infin;</div><div class="stat-l" data-i18n="stat_curr">Currencies</div></div>
-      <div><div class="stat-v">$0</div><div class="stat-l" data-i18n="stat_price">Forever</div></div>
+      <div><div class="stat-v">$0</div><div class="stat-l" data-i18n="stat_price">Core features</div></div>
       <div><div class="stat-v">0</div><div class="stat-l" data-i18n="stat_ads">Ads</div></div>
     </div>
   </div>
@@ -609,7 +615,7 @@
         </div>
         <div>
           <h3 class="bento-title" data-i18n="f_voice_title">Voice input</h3>
-          <p class="bento-desc" data-i18n="f_voice_desc">Just say it. Powered by OpenAI — splits, currency, names parsed automatically.</p>
+          <p class="bento-desc" data-i18n="f_voice_desc">Just say it. Amount, currency, who's in and the category are parsed for you.</p>
           <div class="mini-wave">
             <span style="height:30%;animation-delay:0s"></span><span style="height:55%;animation-delay:.05s"></span>
             <span style="height:80%;animation-delay:.1s"></span><span style="height:45%;animation-delay:.15s"></span>
@@ -783,8 +789,8 @@
     <h2 class="fade-up" data-i18n="faq_title">Questions, answered.</h2>
     <div class="faq-grid">
       <div class="faq-item fade-up">
-        <div class="faq-q" data-i18n="faq1_q">Is it really free?</div>
-        <div class="faq-a" data-i18n="faq1_a">Yes. No ads, no premium tier holding features hostage. Beta is fully free; pricing for v1 will be transparent and announced before launch.</div>
+        <div class="faq-q" data-i18n="faq1_q">What costs money?</div>
+        <div class="faq-a" data-i18n="faq1_a">Nothing you need in order to split a bill. Groups, members, expenses, currencies, offline mode and export are unlimited and free, and there are no ads. Only AI input is metered: 5 voice entries and 3 receipt scans a month. Pro removes that limit.</div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" data-i18n="faq2_q">Android version?</div>
@@ -792,7 +798,7 @@
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" data-i18n="faq3_q">How does voice input work without internet?</div>
-        <div class="faq-a" data-i18n="faq3_a">It doesn't — voice/scan need a connection because they use OpenAI. Manual entry works fully offline; everything syncs once you're back online.</div>
+        <div class="faq-a" data-i18n="faq3_a">It doesn’t — voice and scanning send the audio or photo to AI services, so they need a connection. Speech is transcribed by OpenAI Whisper and understood by Google Gemini. Manual entry works fully offline; everything syncs once you’re back online.</div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q" data-i18n="faq4_q">Do you sell my data?</div>
@@ -815,7 +821,7 @@
   <div class="cta-glow"></div>
   <div class="container">
     <h2 class="fade-up" data-i18n-html="cta_title">Start <span style="color:var(--green);">splitting.</span></h2>
-    <p class="cta-sub fade-up" data-i18n="cta_sub">Free beta. No ads. No data sold. Just an app that does the math.</p>
+    <p class="cta-sub fade-up" data-i18n="cta_sub">No ads. No data sold. Just an app that does the math.</p>
     <div class="cta-actions fade-up">
       <a href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
         <button class="btn btn-primary btn-large" style="font-size:17px; padding:20px 40px;">
@@ -834,11 +840,12 @@
 <!-- ─── Footer ─── -->
 <footer>
   <div class="footer-inner">
-    <div data-i18n="footer_text">SplitAI &copy; 2026 · React Native · Expo · Supabase · OpenAI</div>
+    <div data-i18n="footer_text">Ceru © 2026 · React Native · Expo · Supabase</div>
     <div class="footer-links">
       <a href="https://discord.gg/us3U2zTC" target="_blank" rel="noopener">Discord</a>
-      <a href="#" data-i18n="footer_privacy">Privacy</a>
-      <a href="#" data-i18n="footer_terms">Terms</a>
+      <a href="https://join-page-phi.vercel.app/privacy" data-i18n="footer_privacy">Privacy</a>
+      <a href="https://join-page-phi.vercel.app/terms" data-i18n="footer_terms">Terms</a>
+      <a href="https://join-page-phi.vercel.app/delete-account" data-i18n="footer_delete">Delete account</a>
     </div>
   </div>
 </footer>
@@ -853,12 +860,12 @@ const T = {
     nav_cta: "Get TestFlight",
     hero_pill: "Beta \u00b7 6 languages \u00b7 iOS only",
     hero_title: 'Split expenses.<br>Not <span class="accent">friendships.</span>',
-    hero_sub: "AI splits your dinner bill, your trip costs, your rent \u2014 by voice or photo. Free, offline-friendly, six languages. Built for groups that actually go places together.",
+    hero_sub: "AI splits your dinner bill, your trip costs, your rent — by voice or photo. No ads, offline-friendly, six languages. Built for groups that actually go places together.",
     hero_cta: "Get on TestFlight",
     hero_cta2: "See how it works",
     stat_lang: "Languages",
     stat_curr: "Currencies",
-    stat_price: "Forever",
+    stat_price: "Core features",
     stat_ads: "Ads",
     phone_label: "Voice expense",
     phone_title: "Listening\u2026",
@@ -870,7 +877,7 @@ const T = {
     features_eyebrow: "What\u2019s inside",
     features_title: 'Everything fair-splitting needs.<br><span class="muted-text">Nothing it doesn\u2019t.</span>',
     f_voice_title: "Voice input",
-    f_voice_desc: "Just say it. Powered by OpenAI \u2014 splits, currency, names parsed automatically.",
+    f_voice_desc: "Just say it. Amount, currency, who's in and the category are parsed for you.",
     f_receipt_title: "Receipt scanner",
     f_offline_title: "Offline",
     f_offline_desc: "Plane, mountains, anywhere.",
@@ -905,12 +912,12 @@ const T = {
     quote_attr: "\u2014 Beta tester \u00b7 Romania trip \u00b7 18 expenses, 0 arguments",
     faq_eyebrow: "FAQ",
     faq_title: "Questions, answered.",
-    faq1_q: "Is it really free?",
-    faq1_a: "Yes. No ads, no premium tier holding features hostage. Beta is fully free; pricing for v1 will be transparent and announced before launch.",
+    faq1_q: "What costs money?",
+    faq1_a: "Nothing you need in order to split a bill. Groups, members, expenses, currencies, offline mode and export are unlimited and free, and there are no ads. Only AI input is metered: 5 voice entries and 3 receipt scans a month. Pro removes that limit.",
     faq2_q: "Android version?",
     faq2_a: "Coming after we polish the iOS beta. Join Discord to get notified.",
     faq3_q: "How does voice input work without internet?",
-    faq3_a: "It doesn\u2019t \u2014 voice/scan need a connection because they use OpenAI. Manual entry works fully offline; everything syncs once you\u2019re back online.",
+    faq3_a: "It doesn’t — voice and scanning send the audio or photo to AI services, so they need a connection. Speech is transcribed by OpenAI Whisper and understood by Google Gemini. Manual entry works fully offline; everything syncs once you’re back online.",
     faq4_q: "Do you sell my data?",
     faq4_a: "No. We don\u2019t have ads, we don\u2019t sell data, and your expenses stay in your group. End of story.",
     faq5_q: "What if AI gets the receipt wrong?",
@@ -918,13 +925,14 @@ const T = {
     faq6_q: "Can I leave the beta?",
     faq6_a: "Anytime. Export your data as PDF or Excel before you go.",
     cta_title: 'Start <span style="color:var(--green);">splitting.</span>',
-    cta_sub: "Free beta. No ads. No data sold. Just an app that does the math.",
+    cta_sub: "No ads. No data sold. Just an app that does the math.",
     cta_btn: "Join TestFlight beta",
     copy_btn: "Copy",
     copied: "Copied!",
-    footer_text: "SplitAI \u00a9 2026 \u00b7 React Native \u00b7 Expo \u00b7 Supabase \u00b7 OpenAI",
+    footer_text: "Ceru © 2026 · React Native · Expo · Supabase",
     footer_privacy: "Privacy",
-    footer_terms: "Terms"
+    footer_terms: "Terms",
+    footer_delete: "Delete account"
   },
   ru: {
     nav_features: "\u0412\u043e\u0437\u043c\u043e\u0436\u043d\u043e\u0441\u0442\u0438",
@@ -934,12 +942,12 @@ const T = {
     nav_cta: "\u0421\u043a\u0430\u0447\u0430\u0442\u044c",
     hero_pill: "Beta \u00b7 6 \u044f\u0437\u044b\u043a\u043e\u0432 \u00b7 \u0442\u043e\u043b\u044c\u043a\u043e iOS",
     hero_title: '\u0414\u0435\u043b\u0438 \u0440\u0430\u0441\u0445\u043e\u0434\u044b.<br>\u041d\u0435 <span class="accent">\u0434\u0440\u0443\u0436\u0431\u0443.</span>',
-    hero_sub: "\u0418\u0418 \u0440\u0430\u0437\u0434\u0435\u043b\u0438\u0442 \u0441\u0447\u0451\u0442 \u0437\u0430 \u0443\u0436\u0438\u043d, \u0440\u0430\u0441\u0445\u043e\u0434\u044b \u043d\u0430 \u043f\u043e\u0435\u0437\u0434\u043a\u0443, \u0430\u0440\u0435\u043d\u0434\u0443 \u2014 \u0433\u043e\u043b\u043e\u0441\u043e\u043c \u0438\u043b\u0438 \u0444\u043e\u0442\u043e. \u0411\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e, \u043e\u0444\u043b\u0430\u0439\u043d, \u0448\u0435\u0441\u0442\u044c \u044f\u0437\u044b\u043a\u043e\u0432. \u0414\u043b\u044f \u0433\u0440\u0443\u043f\u043f, \u043a\u043e\u0442\u043e\u0440\u044b\u0435 \u0440\u0435\u0430\u043b\u044c\u043d\u043e \u043f\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0443\u044e\u0442 \u0432\u043c\u0435\u0441\u0442\u0435.",
+    hero_sub: "ИИ разделит счёт за ужин, расходы на поездку, аренду — голосом или фото. Без рекламы, офлайн, шесть языков. Для групп, которые реально путешествуют вместе.",
     hero_cta: "\u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0432 TestFlight",
     hero_cta2: "\u041a\u0430\u043a \u044d\u0442\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442",
     stat_lang: "\u042f\u0437\u044b\u043a\u043e\u0432",
     stat_curr: "\u0412\u0430\u043b\u044e\u0442",
-    stat_price: "\u041d\u0430\u0432\u0441\u0435\u0433\u0434\u0430",
+    stat_price: "Базовые функции",
     stat_ads: "\u0420\u0435\u043a\u043b\u0430\u043c\u0430",
     phone_label: "\u0413\u043e\u043b\u043e\u0441\u043e\u0432\u043e\u0439 \u0440\u0430\u0441\u0445\u043e\u0434",
     phone_title: "\u0421\u043b\u0443\u0448\u0430\u044e\u2026",
@@ -951,7 +959,7 @@ const T = {
     features_eyebrow: "\u0427\u0442\u043e \u0432\u043d\u0443\u0442\u0440\u0438",
     features_title: '\u0412\u0441\u0451 \u0434\u043b\u044f \u0447\u0435\u0441\u0442\u043d\u043e\u0433\u043e \u0440\u0430\u0437\u0434\u0435\u043b\u0435\u043d\u0438\u044f.<br><span class="muted-text">\u041d\u0438\u0447\u0435\u0433\u043e \u043b\u0438\u0448\u043d\u0435\u0433\u043e.</span>',
     f_voice_title: "\u0413\u043e\u043b\u043e\u0441\u043e\u0432\u043e\u0439 \u0432\u0432\u043e\u0434",
-    f_voice_desc: "\u041f\u0440\u043e\u0441\u0442\u043e \u0441\u043a\u0430\u0436\u0438\u0442\u0435. OpenAI \u0440\u0430\u0437\u0431\u0435\u0440\u0451\u0442 \u0441\u0443\u043c\u043c\u0443, \u0432\u0430\u043b\u044e\u0442\u0443 \u0438 \u0438\u043c\u0435\u043d\u0430 \u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0438.",
+    f_voice_desc: "Просто скажите. Сумма, валюта, участники и категория разберутся сами.",
     f_receipt_title: "\u0421\u043a\u0430\u043d\u0435\u0440 \u0447\u0435\u043a\u043e\u0432",
     f_offline_title: "\u041e\u0444\u043b\u0430\u0439\u043d",
     f_offline_desc: "\u0421\u0430\u043c\u043e\u043b\u0451\u0442, \u0433\u043e\u0440\u044b, \u0433\u0434\u0435 \u0443\u0433\u043e\u0434\u043d\u043e.",
@@ -986,12 +994,12 @@ const T = {
     quote_attr: "\u2014 \u0411\u0435\u0442\u0430-\u0442\u0435\u0441\u0442\u0435\u0440 \u00b7 \u041f\u043e\u0435\u0437\u0434\u043a\u0430 \u0432 \u0420\u0443\u043c\u044b\u043d\u0438\u044e \u00b7 18 \u0440\u0430\u0441\u0445\u043e\u0434\u043e\u0432, 0 \u0441\u043f\u043e\u0440\u043e\u0432",
     faq_eyebrow: "\u0427\u0430\u0441\u0442\u044b\u0435 \u0432\u043e\u043f\u0440\u043e\u0441\u044b",
     faq_title: "\u0412\u043e\u043f\u0440\u043e\u0441\u044b \u0438 \u043e\u0442\u0432\u0435\u0442\u044b.",
-    faq1_q: "\u042d\u0442\u043e \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u043e \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u043e?",
-    faq1_a: "\u0414\u0430. \u041d\u0438\u043a\u0430\u043a\u043e\u0439 \u0440\u0435\u043a\u043b\u0430\u043c\u044b, \u043d\u0438\u043a\u0430\u043a\u043e\u0433\u043e \u043f\u0440\u0435\u043c\u0438\u0443\u043c-\u0442\u0430\u0440\u0438\u0444\u0430 \u0441 \u0437\u0430\u043b\u043e\u0447\u0435\u043d\u043d\u044b\u043c\u0438 \u0444\u0443\u043d\u043a\u0446\u0438\u044f\u043c\u0438. \u0411\u0435\u0442\u0430 \u043f\u043e\u043b\u043d\u043e\u0441\u0442\u044c\u044e \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u0430; \u0446\u0435\u043d\u044b \u043d\u0430 v1 \u0431\u0443\u0434\u0443\u0442 \u043f\u0440\u043e\u0437\u0440\u0430\u0447\u043d\u044b\u043c\u0438.",
+    faq1_q: "За что надо платить?",
+    faq1_a: "Ни за что из того, что нужно, чтобы поделить счёт. Группы, участники, расходы, валюты, офлайн и выгрузка — без ограничений и бесплатно, рекламы нет. Ограничен только ИИ-ввод: 5 голосовых записей и 3 скана чеков в месяц. Pro снимает этот лимит.",
     faq2_q: "\u0412\u0435\u0440\u0441\u0438\u044f \u0434\u043b\u044f Android?",
     faq2_a: "\u041f\u043e\u0441\u043b\u0435 \u043f\u043e\u043b\u0438\u0440\u043e\u0432\u043a\u0438 iOS-\u0431\u0435\u0442\u044b. \u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u044f\u0439\u0442\u0435\u0441\u044c \u043a Discord \u0434\u043b\u044f \u043e\u043f\u043e\u0432\u0435\u0449\u0435\u043d\u0438\u0439.",
     faq3_q: "\u041a\u0430\u043a \u0433\u043e\u043b\u043e\u0441 \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u0431\u0435\u0437 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442\u0430?",
-    faq3_a: "\u041d\u0438\u043a\u0430\u043a \u2014 \u0433\u043e\u043b\u043e\u0441/\u0441\u043a\u0430\u043d \u0442\u0440\u0435\u0431\u0443\u044e\u0442 \u0441\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u044f (OpenAI). \u0420\u0443\u0447\u043d\u043e\u0439 \u0432\u0432\u043e\u0434 \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u043e\u0444\u043b\u0430\u0439\u043d; \u0441\u0438\u043d\u0445\u0440\u043e\u043d\u0438\u0437\u0430\u0446\u0438\u044f \u043f\u0440\u0438 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0438.",
+    faq3_a: "Никак — голос и сканирование отправляют запись или фото в сервисы ИИ, поэтому нужна связь. Речь расшифровывает OpenAI Whisper, смысл разбирает Google Gemini. Ручной ввод работает полностью офлайн, всё синхронизируется при подключении.",
     faq4_q: "\u0412\u044b \u043f\u0440\u043e\u0434\u0430\u0451\u0442\u0435 \u043c\u043e\u0438 \u0434\u0430\u043d\u043d\u044b\u0435?",
     faq4_a: "\u041d\u0435\u0442. \u041d\u0435\u0442 \u0440\u0435\u043a\u043b\u0430\u043c\u044b, \u043d\u0435\u0442 \u043f\u0440\u043e\u0434\u0430\u0436\u0438 \u0434\u0430\u043d\u043d\u044b\u0445, \u0432\u0430\u0448\u0438 \u0440\u0430\u0441\u0445\u043e\u0434\u044b \u043e\u0441\u0442\u0430\u044e\u0442\u0441\u044f \u0432 \u0432\u0430\u0448\u0435\u0439 \u0433\u0440\u0443\u043f\u043f\u0435.",
     faq5_q: "\u0410 \u0435\u0441\u043b\u0438 \u0418\u0418 \u043e\u0448\u0438\u0431\u0451\u0442\u0441\u044f \u0441 \u0447\u0435\u043a\u043e\u043c?",
@@ -999,13 +1007,14 @@ const T = {
     faq6_q: "\u041c\u043e\u0436\u043d\u043e \u0432\u044b\u0439\u0442\u0438 \u0438\u0437 \u0431\u0435\u0442\u044b?",
     faq6_a: "\u0412 \u043b\u044e\u0431\u043e\u0439 \u043c\u043e\u043c\u0435\u043d\u0442. \u042d\u043a\u0441\u043f\u043e\u0440\u0442\u0438\u0440\u0443\u0439\u0442\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 PDF \u0438\u043b\u0438 Excel \u043f\u0435\u0440\u0435\u0434 \u0443\u0445\u043e\u0434\u043e\u043c.",
     cta_title: '\u041d\u0430\u0447\u043d\u0438 <span style="color:var(--green);">\u0434\u0435\u043b\u0438\u0442\u044c.</span>',
-    cta_sub: "\u0411\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u0430\u044f \u0431\u0435\u0442\u0430. \u041d\u0435\u0442 \u0440\u0435\u043a\u043b\u0430\u043c\u044b. \u041d\u0435\u0442 \u043f\u0440\u043e\u0434\u0430\u0436\u0438 \u0434\u0430\u043d\u043d\u044b\u0445. \u041f\u0440\u043e\u0441\u0442\u043e \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435, \u043a\u043e\u0442\u043e\u0440\u043e\u0435 \u0441\u0447\u0438\u0442\u0430\u0435\u0442.",
+    cta_sub: "Без рекламы. Без продажи данных. Просто приложение, которое считает.",
     cta_btn: "\u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0432 TestFlight",
     copy_btn: "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c",
     copied: "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e!",
-    footer_text: "SplitAI \u00a9 2026 \u00b7 React Native \u00b7 Expo \u00b7 Supabase \u00b7 OpenAI",
+    footer_text: "Ceru © 2026 · React Native · Expo · Supabase",
     footer_privacy: "\u041a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u044c",
-    footer_terms: "\u0423\u0441\u043b\u043e\u0432\u0438\u044f"
+    footer_terms: "\u0423\u0441\u043b\u043e\u0432\u0438\u044f",
+    footer_delete: "Удаление аккаунта"
   },
   he: {
     nav_features: "\u05ea\u05db\u05d5\u05e0\u05d5\u05ea",
@@ -1015,12 +1024,12 @@ const T = {
     nav_cta: "\u05dc\u05d4\u05d5\u05e8\u05d3\u05d4",
     hero_pill: "Beta \u00b7 6 \u05e9\u05e4\u05d5\u05ea \u00b7 iOS \u05d1\u05dc\u05d1\u05d3",
     hero_title: '\u05de\u05d7\u05dc\u05e7\u05d9\u05dd \u05d4\u05d5\u05e6\u05d0\u05d5\u05ea.<br>\u05dc\u05d0 <span class="accent">\u05d7\u05d1\u05e8\u05d5\u05d9\u05d5\u05ea.</span>',
-    hero_sub: "AI \u05de\u05d7\u05dc\u05e7 \u05d0\u05ea \u05d7\u05e9\u05d1\u05d5\u05df \u05d4\u05d0\u05e8\u05d5\u05d7\u05d4, \u05d4\u05d5\u05e6\u05d0\u05d5\u05ea \u05d4\u05d8\u05d9\u05d5\u05dc, \u05d4\u05e9\u05db\u05d9\u05e8\u05d5\u05ea \u2014 \u05d1\u05e7\u05d5\u05dc \u05d0\u05d5 \u05d1\u05e6\u05d9\u05dc\u05d5\u05dd. \u05d7\u05d9\u05e0\u05dd, \u05e2\u05d5\u05d1\u05d3 \u05d0\u05d5\u05e4\u05dc\u05d9\u05d9\u05df, \u05e9\u05e9 \u05e9\u05e4\u05d5\u05ea. \u05dc\u05e7\u05d1\u05d5\u05e6\u05d5\u05ea \u05e9\u05d1\u05d0\u05de\u05ea \u05e0\u05d5\u05e1\u05e2\u05d5\u05ea \u05d1\u05d9\u05d7\u05d3.",
+    hero_sub: "AI מחלק את חשבון הארוחה, הוצאות הטיול, השכירות — בקול או בצילום. בלי פרסומות, עובד אופליין, שש שפות. לקבוצות שבאמת נוסעות ביחד.",
     hero_cta: "\u05d4\u05d5\u05e8\u05d3\u05d4 \u05de-TestFlight",
     hero_cta2: "\u05d0\u05d9\u05da \u05d6\u05d4 \u05e2\u05d5\u05d1\u05d3",
     stat_lang: "\u05e9\u05e4\u05d5\u05ea",
     stat_curr: "\u05de\u05d8\u05d1\u05e2\u05d5\u05ea",
-    stat_price: "\u05dc\u05ea\u05de\u05d9\u05d3",
+    stat_price: "תכונות בסיסיות",
     stat_ads: "\u05e4\u05e8\u05e1\u05d5\u05de\u05d5\u05ea",
     phone_label: "\u05d4\u05d5\u05e6\u05d0\u05d4 \u05e7\u05d5\u05dc\u05d9\u05ea",
     phone_title: "\u05de\u05d0\u05d6\u05d9\u05df\u2026",
@@ -1032,7 +1041,7 @@ const T = {
     features_eyebrow: "\u05de\u05d4 \u05d1\u05e4\u05e0\u05d9\u05dd",
     features_title: '\u05d4\u05db\u05dc \u05dc\u05d7\u05dc\u05d5\u05e7\u05d4 \u05d4\u05d5\u05d2\u05e0\u05ea.<br><span class="muted-text">\u05d5\u05e8\u05e7 \u05de\u05d4 \u05e9\u05e6\u05e8\u05d9\u05da.</span>',
     f_voice_title: "\u05e7\u05dc\u05d8 \u05e7\u05d5\u05dc\u05d9",
-    f_voice_desc: "\u05e4\u05e9\u05d5\u05d8 \u05ea\u05d2\u05d9\u05d3\u05d5. OpenAI \u05de\u05e4\u05e8\u05e9 \u05e1\u05db\u05d5\u05dd, \u05de\u05d8\u05d1\u05e2 \u05d5\u05e9\u05de\u05d5\u05ea \u05d0\u05d5\u05d8\u05d5\u05de\u05d8\u05d9\u05ea.",
+    f_voice_desc: "פשוט תגידו. הסכום, המטבע, המשתתפים והקטגוריה מפוענחים אוטומטית.",
     f_receipt_title: "\u05e1\u05d5\u05e8\u05e7 \u05e7\u05d1\u05dc\u05d5\u05ea",
     f_offline_title: "\u05d0\u05d5\u05e4\u05dc\u05d9\u05d9\u05df",
     f_offline_desc: "\u05de\u05d8\u05d5\u05e1, \u05d4\u05e8\u05d9\u05dd, \u05d1\u05db\u05dc \u05de\u05e7\u05d5\u05dd.",
@@ -1067,12 +1076,12 @@ const T = {
     quote_attr: "\u2014 \u05d1\u05d8\u05d0-\u05d8\u05e1\u05d8\u05e8 \u00b7 \u05d8\u05d9\u05d5\u05dc \u05d1\u05e8\u05d5\u05de\u05e0\u05d9\u05d4 \u00b7 18 \u05d4\u05d5\u05e6\u05d0\u05d5\u05ea, 0 \u05d5\u05d9\u05db\u05d5\u05d7\u05d9\u05dd",
     faq_eyebrow: "\u05e9\u05d0\u05dc\u05d5\u05ea \u05e0\u05e4\u05d5\u05e6\u05d5\u05ea",
     faq_title: "\u05e9\u05d0\u05dc\u05d5\u05ea \u05d5\u05ea\u05e9\u05d5\u05d1\u05d5\u05ea.",
-    faq1_q: "\u05d6\u05d4 \u05d1\u05d0\u05de\u05ea \u05d7\u05d9\u05e0\u05dd?",
-    faq1_a: "\u05db\u05df. \u05d1\u05dc\u05d9 \u05e4\u05e8\u05e1\u05d5\u05de\u05d5\u05ea, \u05d1\u05dc\u05d9 \u05ea\u05d5\u05db\u05e0\u05d9\u05ea \u05e4\u05e8\u05de\u05d9\u05d5\u05dd \u05e9\u05e0\u05d5\u05e2\u05dc\u05ea \u05ea\u05db\u05d5\u05e0\u05d5\u05ea. \u05d4\u05d1\u05d8\u05d0 \u05d7\u05d9\u05e0\u05de\u05d9\u05ea \u05dc\u05d2\u05de\u05e8\u05d9; \u05de\u05d7\u05d9\u05e8\u05d9 v1 \u05d9\u05d4\u05d9\u05d5 \u05e9\u05e7\u05d5\u05e4\u05d9\u05dd.",
+    faq1_q: "על מה משלמים?",
+    faq1_a: "על כלום ממה שצריך כדי לחלק חשבון. קבוצות, משתתפים, הוצאות, מטבעות, מצב אופליין וייצוא — ללא הגבלה וללא תשלום, ובלי פרסומות. רק הזנת ה-AI מוגבלת: 5 הקלטות קוליות ו-3 סריקות קבלה בחודש. Pro מסיר את המגבלה.",
     faq2_q: "\u05d2\u05e8\u05e1\u05ea Android?",
     faq2_a: "\u05d0\u05d7\u05e8\u05d9 \u05e9\u05e0\u05dc\u05d8\u05e9 \u05d0\u05ea \u05d4\u05d1\u05d8\u05d0 \u05dc-iOS. \u05d4\u05e6\u05d8\u05e8\u05e4\u05d5 \u05dc-Discord \u05dc\u05e2\u05d3\u05db\u05d5\u05e0\u05d9\u05dd.",
     faq3_q: "\u05d0\u05d9\u05da \u05e7\u05dc\u05d8 \u05e7\u05d5\u05dc\u05d9 \u05e2\u05d5\u05d1\u05d3 \u05d1\u05dc\u05d9 \u05d0\u05d9\u05e0\u05d8\u05e8\u05e0\u05d8?",
-    faq3_a: "\u05dc\u05d0 \u05e2\u05d5\u05d1\u05d3 \u2014 \u05e7\u05d5\u05dc/\u05e1\u05e8\u05d9\u05e7\u05d4 \u05d3\u05d5\u05e8\u05e9\u05d9\u05dd \u05d7\u05d9\u05d1\u05d5\u05e8 (OpenAI). \u05d4\u05d6\u05e0\u05d4 \u05d9\u05d3\u05e0\u05d9\u05ea \u05e2\u05d5\u05d1\u05d3\u05ea \u05d0\u05d5\u05e4\u05dc\u05d9\u05d9\u05df; \u05e1\u05e0\u05db\u05e8\u05d5\u05df \u05d1\u05d7\u05d6\u05e8\u05d4 \u05dc\u05e8\u05e9\u05ea.",
+    faq3_a: "לא עובד — קול וסריקה שולחים את ההקלטה או התמונה לשירותי AI, ולכן דרוש חיבור. הדיבור מתומלל על ידי OpenAI Whisper והמשמעות מפוענחת על ידי Google Gemini. הזנה ידנית עובדת אופליין לגמרי; הכול מסתנכרן בחזרה לרשת.",
     faq4_q: "\u05d0\u05ea\u05dd \u05de\u05d5\u05db\u05e8\u05d9\u05dd \u05d0\u05ea \u05d4\u05de\u05d9\u05d3\u05e2 \u05e9\u05dc\u05d9?",
     faq4_a: "\u05dc\u05d0. \u05d0\u05d9\u05df \u05e4\u05e8\u05e1\u05d5\u05de\u05d5\u05ea, \u05d0\u05d9\u05df \u05de\u05db\u05d9\u05e8\u05ea \u05de\u05d9\u05d3\u05e2, \u05d4\u05d4\u05d5\u05e6\u05d0\u05d5\u05ea \u05e9\u05dc\u05db\u05dd \u05e0\u05e9\u05d0\u05e8\u05d5\u05ea \u05d1\u05e7\u05d1\u05d5\u05e6\u05d4.",
     faq5_q: "\u05de\u05d4 \u05d0\u05dd AI \u05d8\u05d5\u05e2\u05d4 \u05d1\u05e7\u05d1\u05dc\u05d4?",
@@ -1080,13 +1089,14 @@ const T = {
     faq6_q: "\u05d0\u05e4\u05e9\u05e8 \u05dc\u05e2\u05d6\u05d5\u05d1 \u05d0\u05ea \u05d4\u05d1\u05d8\u05d0?",
     faq6_a: "\u05d1\u05db\u05dc \u05e8\u05d2\u05e2. \u05d9\u05d9\u05e6\u05d0\u05d5 \u05d0\u05ea \u05d4\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05dc-PDF \u05d0\u05d5 Excel \u05dc\u05e4\u05e0\u05d9 \u05e9\u05e2\u05d5\u05d6\u05d1\u05d9\u05dd.",
     cta_title: '\u05d4\u05ea\u05d7\u05d9\u05dc\u05d5 <span style="color:var(--green);">\u05dc\u05d7\u05dc\u05e7.</span>',
-    cta_sub: "\u05d1\u05d8\u05d0 \u05d7\u05d9\u05e0\u05de\u05d9\u05ea. \u05d1\u05dc\u05d9 \u05e4\u05e8\u05e1\u05d5\u05de\u05d5\u05ea. \u05d1\u05dc\u05d9 \u05de\u05db\u05d9\u05e8\u05ea \u05de\u05d9\u05d3\u05e2. \u05e4\u05e9\u05d5\u05d8 \u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d4 \u05e9\u05e2\u05d5\u05e9\u05d4 \u05d0\u05ea \u05d4\u05d7\u05e9\u05d1\u05d5\u05df.",
+    cta_sub: "בלי פרסומות. בלי מכירת מידע. פשוט אפליקציה שעושה את החשבון.",
     cta_btn: "\u05d4\u05d5\u05e8\u05d3\u05d4 \u05de-TestFlight",
     copy_btn: "\u05d4\u05e2\u05ea\u05e7",
     copied: "\u05d4\u05d5\u05e2\u05ea\u05e7!",
-    footer_text: "SplitAI \u00a9 2026 \u00b7 React Native \u00b7 Expo \u00b7 Supabase \u00b7 OpenAI",
+    footer_text: "Ceru © 2026 · React Native · Expo · Supabase",
     footer_privacy: "\u05e4\u05e8\u05d8\u05d9\u05d5\u05ea",
-    footer_terms: "\u05ea\u05e0\u05d0\u05d9\u05dd"
+    footer_terms: "\u05ea\u05e0\u05d0\u05d9\u05dd",
+    footer_delete: "מחיקת חשבון"
   }
 };
 
@@ -1109,10 +1119,10 @@ function setLang(lang) {
     if (strings[key]) el.innerHTML = strings[key];
   });
   document.title = lang === "ru"
-    ? "SplitAI \u2014 \u0423\u043c\u043d\u043e\u0435 \u0440\u0430\u0437\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0440\u0430\u0441\u0445\u043e\u0434\u043e\u0432"
+    ? "Ceru \u2014 \u0423\u043c\u043d\u043e\u0435 \u0440\u0430\u0437\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0440\u0430\u0441\u0445\u043e\u0434\u043e\u0432"
     : lang === "he"
-    ? "SplitAI \u2014 \u05d7\u05dc\u05d5\u05e7\u05ea \u05d4\u05d5\u05e6\u05d0\u05d5\u05ea \u05d7\u05db\u05de\u05d4"
-    : "SplitAI \u2014 Split expenses. Not friendships.";
+    ? "Ceru \u2014 \u05d7\u05dc\u05d5\u05e7\u05ea \u05d4\u05d5\u05e6\u05d0\u05d5\u05ea \u05d7\u05db\u05de\u05d4"
+    : "Ceru \u2014 Split expenses. Not friendships.";
   try { localStorage.setItem("lang", lang); } catch(e) {}
 }
 

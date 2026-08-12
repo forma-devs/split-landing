@@ -68,7 +68,9 @@
   }
   .brand { display: flex; align-items: center; gap: 12px; }
   .brand-logo {
-    width: 32px; height: 32px; border-radius: 8px;
+    /* Radius is 22.4% of the size — the proportion iOS uses for app icons, so
+       the mark reads the same here as it does on a home screen. */
+    width: 44px; height: 44px; border-radius: 10px;
     object-fit: cover;
   }
   .brand-name { font-weight: 600; font-size: 15px; letter-spacing: -.005em; }

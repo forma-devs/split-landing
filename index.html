@@ -349,6 +349,51 @@
     padding-top: 6px; color: var(--green); font-weight: 600;
   }
 
+  /* Mini demos in the small cards. Same device as .mini-wave and
+     .receipt-box on the big cards: show the feature instead of only naming
+     it. Kept under ~56px so a 220px card still fits its title and
+     description in Russian and Hebrew, which run longer than English. */
+  .mini { margin-top: 14px; }
+  .mini-row { display: flex; align-items: center; gap: 8px; }
+  .mini-mono { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--white); }
+  .mini-sub { font-size: 10px; color: var(--muted); margin-top: 5px; }
+  .mini-arrow { color: var(--green); }
+  .mini-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--ink); border: 1px solid var(--line);
+    border-radius: 999px; padding: 4px 10px; font-size: 10px; color: var(--muted);
+  }
+  .mini-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--warm); flex: 0 0 auto; }
+
+  .mini-split { display: flex; gap: 3px; height: 8px; }
+  .mini-split i { display: block; background: var(--green); border-radius: 2px; }
+  .mini-split i:nth-child(2) { opacity: .6; }
+  .mini-split i:nth-child(3) { opacity: .35; }
+
+  .mini-bars { display: flex; align-items: flex-end; gap: 4px; height: 42px; }
+  .mini-bars i { flex: 1; background: var(--green); border-radius: 2px 2px 0 0; opacity: .55; }
+  .mini-bars i:last-child { opacity: 1; }
+
+  .mini-push {
+    display: flex; gap: 8px; align-items: flex-start;
+    background: var(--ink); border: 1px solid var(--line);
+    border-radius: 10px; padding: 8px 10px;
+  }
+  .mini-push-icon { width: 16px; height: 16px; border-radius: 4px; background: var(--green); flex: 0 0 auto; }
+  .mini-push-title { font-size: 10px; font-weight: 600; }
+  .mini-push-body { font-size: 10px; color: var(--muted); }
+
+  .mini-chips { display: flex; gap: 6px; }
+  .mini-chip {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 4px 8px; color: var(--muted); background: var(--ink);
+  }
+
+  /* The six small cards swipe on phones. display:contents keeps them direct
+     grid items everywhere else, so the bento layout above is untouched. */
+  .bento-small { display: contents; }
+
   /* ─── How ─── */
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .step {
@@ -511,6 +556,21 @@
     .phone { transform: rotate(0deg); width: 280px; height: 560px; }
     .nav-cta { display: none; }
     .mobile-menu { padding: 8px 20px 20px; }
+    /* Horizontal, snapping, bleeding to both screen edges. The 76% card
+       width leaves a sliver of the next one visible, which is what tells
+       people the row scrolls at all. */
+    .bento-small {
+      display: flex; gap: 12px; overflow-x: auto;
+      scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+      margin: 0 -24px; padding: 0 24px; scroll-padding-inline-start: 24px;
+      scrollbar-width: none;
+    }
+    .bento-small::-webkit-scrollbar { display: none; }
+    .bento-small > .bento-card {
+      flex: 0 0 76%; min-height: 220px; scroll-snap-align: start;
+    }
+    /* Lifting a card on hover inside a scroller just causes jitter on touch. */
+    .bento-small > .bento-card:hover { transform: none; }
   }
 </style>
 </head>
@@ -732,10 +792,15 @@
         </div>
       </div>
 
+      <div class="bento-small">
       <!-- Offline -->
       <div class="bento-card fade-up">
         <div class="bento-icon muted">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>
+        </div>
+        <div class="mini">
+          <span class="mini-pill"><span class="mini-dot"></span><span data-i18n="f_offline_mini">Waiting to sync</span></span>
+          <div class="mini-sub mini-mono">&euro;80.00 &middot; &euro;24.50</div>
         </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_offline_title">Offline</div>
@@ -748,6 +813,10 @@
         <div class="bento-icon muted">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13l-3-3"/><path d="M21 17H8l3 3"/></svg>
         </div>
+        <div class="mini">
+          <div class="mini-row mini-mono">&yen;10,000 <span class="mini-arrow">&rarr;</span> &euro;61.20</div>
+          <div class="mini-sub">0.00612 &middot; 18.08</div>
+        </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_currency_title">Multi-currency</div>
           <div class="bento-desc small-desc" data-i18n="f_currency_desc">Live FX, auto-convert.</div>
@@ -758,6 +827,10 @@
       <div class="bento-card fade-up">
         <div class="bento-icon muted">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="mini">
+          <div class="mini-split"><i style="flex:5"></i><i style="flex:3"></i><i style="flex:2"></i></div>
+          <div class="mini-sub mini-mono">50 &middot; 30 &middot; 20%</div>
         </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_splits_title">Flexible splits</div>
@@ -770,6 +843,9 @@
         <div class="bento-icon muted">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
+        <div class="mini">
+          <div class="mini-bars"><i style="height:35%"></i><i style="height:55%"></i><i style="height:40%"></i><i style="height:72%"></i><i style="height:50%"></i><i style="height:88%"></i><i style="height:64%"></i></div>
+        </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_analytics_title">Analytics</div>
           <div class="bento-desc small-desc" data-i18n="f_analytics_desc">Categories, trends, insights.</div>
@@ -780,6 +856,15 @@
       <div class="bento-card fade-up">
         <div class="bento-icon muted">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        </div>
+        <div class="mini">
+          <div class="mini-push">
+            <span class="mini-push-icon"></span>
+            <div>
+              <div class="mini-push-title">Ceru</div>
+              <div class="mini-push-body" data-i18n="f_push_mini">Alla added &euro;80</div>
+            </div>
+          </div>
         </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_push_title">Push alerts</div>
@@ -792,10 +877,14 @@
         <div class="bento-icon muted">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg>
         </div>
+        <div class="mini">
+          <div class="mini-chips"><span class="mini-chip">PDF</span><span class="mini-chip">XLSX</span></div>
+        </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_export_title">Export</div>
           <div class="bento-desc small-desc" data-i18n="f_export_desc">PDF / Excel · localized.</div>
         </div>
+      </div>
       </div>
     </div>
   </div>
@@ -969,6 +1058,8 @@ const T = {
     f_push_desc: "New expense, settle, budget.",
     f_export_title: "Export",
     f_export_desc: "PDF / Excel \u00b7 localized.",
+    f_offline_mini: "Waiting to sync",
+    f_push_mini: "Alla added €80",
     how_eyebrow: "30 seconds, 4 steps",
     how_title: "From install to settled",
     s1_title: "Install",
@@ -1053,6 +1144,8 @@ const T = {
     f_push_desc: "\u041d\u043e\u0432\u044b\u0439 \u0440\u0430\u0441\u0445\u043e\u0434, \u043e\u043f\u043b\u0430\u0442\u0430, \u0431\u044e\u0434\u0436\u0435\u0442.",
     f_export_title: "\u042d\u043a\u0441\u043f\u043e\u0440\u0442",
     f_export_desc: "PDF / Excel \u00b7 \u043b\u043e\u043a\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u043d.",
+    f_offline_mini: "\u0416\u0434\u0451\u0442 \u0441\u0435\u0442\u0438",
+    f_push_mini: "\u0410\u043b\u043b\u0430 \u0434\u043e\u0431\u0430\u0432\u0438\u043b\u0430 \u20ac80",
     how_eyebrow: "30 \u0441\u0435\u043a\u0443\u043d\u0434, 4 \u0448\u0430\u0433\u0430",
     how_title: "\u041e\u0442 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0438 \u0434\u043e \u0440\u0430\u0441\u0447\u0451\u0442\u0430",
     s1_title: "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435",
@@ -1137,6 +1230,8 @@ const T = {
     f_push_desc: "\u05d4\u05d5\u05e6\u05d0\u05d4 \u05d7\u05d3\u05e9\u05d4, \u05d4\u05e1\u05d3\u05e8, \u05ea\u05e7\u05e6\u05d9\u05d1.",
     f_export_title: "\u05d9\u05d9\u05e6\u05d5\u05d0",
     f_export_desc: "PDF / Excel \u00b7 \u05de\u05ea\u05d5\u05e8\u05d2\u05dd.",
+    f_offline_mini: "\u05de\u05de\u05ea\u05d9\u05df \u05dc\u05e1\u05e0\u05db\u05e8\u05d5\u05df",
+    f_push_mini: "\u05d0\u05dc\u05d4 \u05d4\u05d5\u05e1\u05d9\u05e4\u05d4 \u20ac80",
     how_eyebrow: "30 \u05e9\u05e0\u05d9\u05d5\u05ea, 4 \u05e6\u05e2\u05d3\u05d9\u05dd",
     how_title: "\u05de\u05d4\u05ea\u05e7\u05e0\u05d4 \u05dc\u05d4\u05ea\u05d7\u05e9\u05d1\u05e0\u05d5\u05ea",
     s1_title: "\u05d4\u05ea\u05e7\u05d9\u05e0\u05d5",

@@ -97,6 +97,48 @@
   }
   .lang-btn:hover { color: var(--white); }
   .lang-btn.active { background: var(--green); color: white; }
+
+  /* --- Mobile menu --- */
+  /* The bar only has room for the brand on a phone, so the anchors and the
+     language switch move into a panel that drops out of the nav itself.
+     A dropdown (not a side drawer) keeps this RTL-safe: nothing slides from
+     a hardcoded edge, so Hebrew needs no mirrored variant. */
+  .nav-toggle {
+    display: none;
+    width: 40px; height: 40px; padding: 0;
+    flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    background: none; border: 1px solid var(--line); border-radius: 8px;
+  }
+  .nav-toggle span {
+    display: block; width: 18px; height: 2px; border-radius: 2px;
+    background: var(--white);
+    transition: transform .22s ease, opacity .18s ease;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu { display: none; border-top: 1px solid var(--line); padding: 8px 24px 24px; }
+  @keyframes menuIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  .mobile-links { display: flex; flex-direction: column; }
+  .mobile-links a {
+    padding: 15px 2px; font-size: 16px; font-weight: 500;
+    border-bottom: 1px solid var(--line);
+  }
+  .mobile-foot { display: flex; align-items: center; gap: 14px; margin-top: 20px; }
+  .mobile-foot .lang-switch { flex: 0 0 auto; }
+  /* 44px minimum touch target - the desktop sizes are mouse-sized. */
+  .mobile-foot .lang-btn { padding: 0 14px; min-height: 44px; font-size: 12px; }
+  .mobile-foot-cta { flex: 1 1 auto; }
+  .mobile-foot-cta .btn { width: 100%; padding: 0 18px; min-height: 44px; }
+
+  /* Sticky nav would otherwise cover the heading an anchor jumps to. */
+  section[id] { scroll-margin-top: 84px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-menu.open { animation: none; }
+    .nav-toggle span { transition: none; }
+  }
   .btn {
     padding: 10px 18px; border-radius: 999px; border: none;
     font-weight: 600; font-size: 13px; transition: transform .15s;
@@ -448,6 +490,9 @@
     .langs { grid-template-columns: 1fr 1fr; }
     .faq-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    .nav-right > .lang-switch { display: none; }
+    .mobile-menu.open { display: block; animation: menuIn .18s ease; }
     .container { padding: 0 24px; }
     .nav-inner { padding: 16px 24px; }
     .cta-section h2 { font-size: 56px; }
@@ -464,6 +509,8 @@
     .cta-section h2 { font-size: 40px; }
     blockquote { font-size: 24px; }
     .phone { transform: rotate(0deg); width: 280px; height: 560px; }
+    .nav-cta { display: none; }
+    .mobile-menu { padding: 8px 20px 20px; }
   }
 </style>
 </head>
@@ -489,7 +536,30 @@
         <button class="lang-btn" onclick="setLang('ru')">RU</button>
         <button class="lang-btn" onclick="setLang('he')">HE</button>
       </div>
-      <a href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
+      <a class="nav-cta" href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
+        <button class="btn btn-primary" data-i18n="nav_cta">Get TestFlight</button>
+      </a>
+      <button class="nav-toggle" id="navToggle" type="button" onclick="toggleMenu()"
+              aria-expanded="false" aria-controls="mobileMenu"
+              aria-label="Menu" data-i18n-aria="nav_menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-links">
+      <a href="#features" data-i18n="nav_features">Features</a>
+      <a href="#how" data-i18n="nav_how">How it works</a>
+      <a href="#languages" data-i18n="nav_languages">Languages</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    </div>
+    <div class="mobile-foot">
+      <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('ru')">RU</button>
+        <button class="lang-btn" onclick="setLang('he')">HE</button>
+      </div>
+      <a class="mobile-foot-cta" href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
         <button class="btn btn-primary" data-i18n="nav_cta">Get TestFlight</button>
       </a>
     </div>
@@ -865,6 +935,7 @@ const T = {
     nav_languages: "Languages",
     nav_faq: "FAQ",
     nav_cta: "Get TestFlight",
+    nav_menu: "Menu",
     hero_pill: "Beta \u00b7 6 languages \u00b7 iOS only",
     hero_title: 'Split expenses.<br>Not <span class="accent">friendships.</span>',
     hero_sub: "AI splits your dinner bill, your trip costs, your rent — by voice or photo. No ads, offline-friendly, six languages. Built for groups that actually go places together.",
@@ -948,6 +1019,7 @@ const T = {
     nav_languages: "\u042f\u0437\u044b\u043a\u0438",
     nav_faq: "FAQ",
     nav_cta: "\u0421\u043a\u0430\u0447\u0430\u0442\u044c",
+    nav_menu: "\u041c\u0435\u043d\u044e",
     hero_pill: "Beta \u00b7 6 \u044f\u0437\u044b\u043a\u043e\u0432 \u00b7 \u0442\u043e\u043b\u044c\u043a\u043e iOS",
     hero_title: '\u0414\u0435\u043b\u0438 \u0440\u0430\u0441\u0445\u043e\u0434\u044b.<br>\u041d\u0435 <span class="accent">\u0434\u0440\u0443\u0436\u0431\u0443.</span>',
     hero_sub: "ИИ разделит счёт за ужин, расходы на поездку, аренду — голосом или фото. Без рекламы, офлайн, шесть языков. Для групп, которые реально путешествуют вместе.",
@@ -1031,6 +1103,7 @@ const T = {
     nav_languages: "\u05e9\u05e4\u05d5\u05ea",
     nav_faq: "FAQ",
     nav_cta: "\u05dc\u05d4\u05d5\u05e8\u05d3\u05d4",
+    nav_menu: "\u05ea\u05e4\u05e8\u05d9\u05d8",
     hero_pill: "Beta \u00b7 6 \u05e9\u05e4\u05d5\u05ea \u00b7 iOS \u05d1\u05dc\u05d1\u05d3",
     hero_title: '\u05de\u05d7\u05dc\u05e7\u05d9\u05dd \u05d4\u05d5\u05e6\u05d0\u05d5\u05ea.<br>\u05dc\u05d0 <span class="accent">\u05d7\u05d1\u05e8\u05d5\u05d9\u05d5\u05ea.</span>',
     hero_sub: "AI מחלק את חשבון הארוחה, הוצאות הטיול, השכירות — בקול או בצילום. בלי פרסומות, עובד אופליין, שש שפות. לקבוצות שבאמת נוסעות ביחד.",
@@ -1128,6 +1201,10 @@ function setLang(lang) {
     var key = el.getAttribute("data-i18n-html");
     if (strings[key]) el.innerHTML = strings[key];
   });
+  document.querySelectorAll("[data-i18n-aria]").forEach(function(el) {
+    var key = el.getAttribute("data-i18n-aria");
+    if (strings[key]) el.setAttribute("aria-label", strings[key]);
+  });
   document.title = lang === "ru"
     ? "Ceru \u2014 \u0423\u043c\u043d\u043e\u0435 \u0440\u0430\u0437\u0434\u0435\u043b\u0435\u043d\u0438\u0435 \u0440\u0430\u0441\u0445\u043e\u0434\u043e\u0432"
     : lang === "he"
@@ -1135,6 +1212,48 @@ function setLang(lang) {
     : "Ceru \u2014 Split expenses. Not friendships.";
   try { localStorage.setItem("lang", lang); } catch(e) {}
 }
+
+function toggleMenu() {
+  var menu = document.getElementById("mobileMenu");
+  if (menu.classList.contains("open")) { closeMenu(); } else { openMenu(); }
+}
+
+function openMenu() {
+  document.getElementById("mobileMenu").classList.add("open");
+  document.getElementById("navToggle").setAttribute("aria-expanded", "true");
+  document.body.style.overflow = "hidden";
+}
+
+function closeMenu() {
+  document.getElementById("mobileMenu").classList.remove("open");
+  document.getElementById("navToggle").setAttribute("aria-expanded", "false");
+  document.body.style.overflow = "";
+}
+
+// Anchor tapped: let the jump happen, then get the panel out of the way.
+document.querySelectorAll("#mobileMenu a").forEach(function(a) {
+  a.addEventListener("click", closeMenu);
+});
+
+// Escape, a tap outside the nav, or growing past the mobile breakpoint all
+// close it - otherwise the panel can be left open with no way back.
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeMenu();
+});
+document.addEventListener("click", function(e) {
+  var menu = document.getElementById("mobileMenu");
+  if (menu.classList.contains("open") && !e.target.closest("nav.nav")) closeMenu();
+});
+var wideScreen = window.matchMedia("(min-width: 981px)");
+function syncMenuToBreakpoint(e) { if (e.matches) closeMenu(); }
+if (wideScreen.addEventListener) {
+  wideScreen.addEventListener("change", syncMenuToBreakpoint);
+} else {
+  wideScreen.addListener(syncMenuToBreakpoint);
+}
+window.addEventListener("resize", function() {
+  if (window.innerWidth > 980) closeMenu();
+});
 
 function copyLink(btn) {
   navigator.clipboard.writeText("https://testflight.apple.com/join/HBdzGyGA").then(function() {

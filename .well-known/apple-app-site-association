@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["2X5NZ5572C.com.splitai.app"],
+        "components": [
+          {
+            "/": "/join",
+            "comment": "Invite link with the code in the query string, which is what the Supabase join edge function redirects to"
+          },
+          {
+            "/": "/join/*",
+            "comment": "Invite link with the code in the path, which is what the app builds once EXPO_PUBLIC_APP_LINK_DOMAIN is set"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -74,11 +74,6 @@
     object-fit: cover;
   }
   .brand-name { font-weight: 600; font-size: 15px; letter-spacing: -.005em; }
-  .badge-beta {
-    font-size: 10px; color: var(--green);
-    border: 1px solid var(--green); padding: 2px 8px; border-radius: 999px;
-    font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-  }
   .nav-links { display: flex; gap: 32px; font-size: 13px; color: var(--muted); }
   .nav-links a { transition: color .15s; }
   .nav-links a:hover { color: var(--white); }
@@ -461,11 +456,6 @@
   .cta-sub {
     font-size: 19px; color: var(--muted); margin-bottom: 36px; position: relative;
   }
-  .cta-actions { position: relative; }
-  .cta-link {
-    margin-top: 16px; font-size: 12px; color: var(--muted); position: relative;
-    font-family: 'JetBrains Mono', monospace;
-  }
   .cta-android {
     margin-top: 14px; font-size: 13px; color: var(--muted); position: relative;
   }
@@ -474,14 +464,6 @@
     word-break: break-all;
   }
   .cta-android a:hover { border-bottom-color: var(--green); }
-  .copy-btn {
-    background: none; border: 1px solid var(--line); color: var(--muted);
-    padding: 4px 12px; border-radius: 6px; font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    cursor: pointer; transition: all .2s; margin-left: 8px;
-  }
-  .copy-btn:hover { border-color: var(--green); color: var(--green); }
-  .copy-btn.copied { border-color: var(--green); color: var(--green); }
 
   /* ─── Footer ─── */
   footer {
@@ -590,7 +572,6 @@
     <a class="brand" href="#">
       <img src="icon.png" class="brand-logo" alt="Ceru">
       <span class="brand-name">Ceru</span>
-      <span class="badge-beta">Beta</span>
     </a>
     <div class="nav-links">
       <a href="#features" data-i18n="nav_features">Features</a>
@@ -604,8 +585,8 @@
         <button class="lang-btn" onclick="setLang('ru')">RU</button>
         <button class="lang-btn" onclick="setLang('he')">HE</button>
       </div>
-      <a class="nav-cta" href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
-        <button class="btn btn-primary" data-i18n="nav_cta">Get TestFlight</button>
+      <a class="nav-cta" href="https://apps.apple.com/app/id6759336973" target="_blank" rel="noopener">
+        <button class="btn btn-primary" data-i18n="nav_cta">Download</button>
       </a>
       <button class="nav-toggle" id="navToggle" type="button" onclick="toggleMenu()"
               aria-expanded="false" aria-controls="mobileMenu"
@@ -627,8 +608,8 @@
         <button class="lang-btn" onclick="setLang('ru')">RU</button>
         <button class="lang-btn" onclick="setLang('he')">HE</button>
       </div>
-      <a class="mobile-foot-cta" href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
-        <button class="btn btn-primary" data-i18n="nav_cta">Get TestFlight</button>
+      <a class="mobile-foot-cta" href="https://apps.apple.com/app/id6759336973" target="_blank" rel="noopener">
+        <button class="btn btn-primary" data-i18n="nav_cta">Download</button>
       </a>
     </div>
   </div>
@@ -642,7 +623,7 @@
   <div class="hero-left">
     <div class="hero-pill">
       <span class="pulse"></span>
-      <span data-i18n="hero_pill">Beta · 6 languages · iOS &amp; Android</span>
+      <span data-i18n="hero_pill">6 languages · iOS</span>
     </div>
     <h1 data-i18n-html="hero_title">
       Split expenses.<br>
@@ -650,10 +631,10 @@
     </h1>
     <p class="hero-sub" data-i18n="hero_sub">AI splits your dinner bill, your trip costs, your rent — by voice or photo. No ads, offline-friendly, six languages. Built for groups that actually go places together.</p>
     <div class="hero-actions">
-      <a href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
+      <a href="https://apps.apple.com/app/id6759336973" target="_blank" rel="noopener">
         <button class="btn btn-primary btn-large">
           <svg width="16" height="18" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-          <span data-i18n="hero_cta">Get on TestFlight</span>
+          <span data-i18n="hero_cta">Download on the App Store</span>
         </button>
       </a>
       <a href="#get">
@@ -848,7 +829,7 @@
         </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_splits_title">Flexible splits</div>
-          <div class="bento-desc small-desc" data-i18n="f_splits_desc">Equal · exact · % · multi-payer.</div>
+          <div class="bento-desc small-desc" data-i18n="f_splits_desc">Equal · exact · shares · multi-payer.</div>
         </div>
       </div>
 
@@ -862,7 +843,7 @@
         </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_analytics_title">Analytics</div>
-          <div class="bento-desc small-desc" data-i18n="f_analytics_desc">Categories, trends, insights.</div>
+          <div class="bento-desc small-desc" data-i18n="f_analytics_desc">Categories, trends, insights · Pro.</div>
         </div>
       </div>
 
@@ -896,7 +877,7 @@
         </div>
         <div>
           <div class="bento-title small-title" data-i18n="f_export_title">Export</div>
-          <div class="bento-desc small-desc" data-i18n="f_export_desc">PDF / Excel · localized.</div>
+          <div class="bento-desc small-desc" data-i18n="f_export_desc">PDF / Excel · Pro.</div>
         </div>
       </div>
       </div>
@@ -913,7 +894,7 @@
       <div class="step fade-up">
         <div class="step-num">STEP 01</div>
         <div class="step-t" data-i18n="s1_title">Install</div>
-        <div class="step-d" data-i18n="s1_desc">TestFlight, 30 seconds.</div>
+        <div class="step-d" data-i18n="s1_desc">App Store, 30 seconds.</div>
       </div>
       <div class="step fade-up">
         <div class="step-num">STEP 02</div>
@@ -972,10 +953,6 @@
         <div class="faq-a" data-i18n="faq1_a">Nothing you need in order to split a bill. Groups, members, expenses, currencies, offline mode and export are unlimited and free, and there are no ads. Only AI input is metered: 5 voice entries and 3 receipt scans a month. Pro removes that limit.</div>
       </div>
       <div class="faq-item fade-up">
-        <div class="faq-q" data-i18n="faq2_q">Android version?</div>
-        <div class="faq-a" data-i18n="faq2_a">Coming after we polish the iOS beta. Join Discord to get notified.</div>
-      </div>
-      <div class="faq-item fade-up">
         <div class="faq-q" data-i18n="faq3_q">How does voice input work without internet?</div>
         <div class="faq-a" data-i18n="faq3_a">It doesn’t — voice and scanning send the audio or photo to AI services, so they need a connection. Speech is transcribed by OpenAI Whisper and understood by Google Gemini. Manual entry works fully offline; everything syncs once you’re back online.</div>
       </div>
@@ -1002,16 +979,12 @@
     <h2 class="fade-up" data-i18n-html="cta_title">Start <span style="color:var(--green);">splitting.</span></h2>
     <p class="cta-sub fade-up" data-i18n="cta_sub">No ads. No data sold. Just an app that does the math.</p>
     <div class="cta-actions fade-up">
-      <a href="https://testflight.apple.com/join/HBdzGyGA" target="_blank" rel="noopener">
+      <a href="https://apps.apple.com/app/id6759336973" target="_blank" rel="noopener">
         <button class="btn btn-primary btn-large" style="font-size:17px; padding:20px 40px;">
           <svg width="18" height="22" viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-          <span data-i18n="cta_btn">Join TestFlight beta</span>
+          <span data-i18n="cta_btn">Download on the App Store</span>
         </button>
       </a>
-      <div class="cta-link">
-        <span>testflight.apple.com/join/HBdzGyGA</span>
-        <button class="copy-btn" onclick="copyLink(this)" data-i18n="copy_btn">Copy</button>
-      </div>
       <div class="cta-android">
         <span data-i18n="cta_android">Android — write to us and we'll send you a build:</span>
         <a href="mailto:av.studio.devs@gmail.com?subject=Ceru%20Android">av.studio.devs@gmail.com</a>
@@ -1025,7 +998,6 @@
   <div class="footer-inner">
     <div data-i18n="footer_text">Ceru © 2026 · React Native · Expo · Supabase</div>
     <div class="footer-links">
-      <a href="https://discord.gg/us3U2zTC" target="_blank" rel="noopener">Discord</a>
       <a href="mailto:av.studio.devs@gmail.com" data-i18n="footer_support">Support</a>
       <a href="privacy.html" data-i18n="footer_privacy">Privacy</a>
       <a href="terms.html" data-i18n="footer_terms">Terms</a>
@@ -1041,12 +1013,12 @@ const T = {
     nav_how: "How it works",
     nav_languages: "Languages",
     nav_faq: "FAQ",
-    nav_cta: "Get TestFlight",
+    nav_cta: "Download",
     nav_menu: "Menu",
-    hero_pill: "Beta \u00b7 6 languages \u00b7 iOS & Android",
+    hero_pill: "6 languages · iOS",
     hero_title: 'Split expenses.<br>Not <span class="accent">friendships.</span>',
     hero_sub: "AI splits your dinner bill, your trip costs, your rent — by voice or photo. No ads, offline-friendly, six languages. Built for groups that actually go places together.",
-    hero_cta: "Get on TestFlight",
+    hero_cta: "Download on the App Store",
     hero_cta2: "See how it works",
     hero_cta3: "Android",
     stat_lang: "Languages",
@@ -1070,19 +1042,19 @@ const T = {
     f_currency_title: "Multi-currency",
     f_currency_desc: "Live FX, auto-convert.",
     f_splits_title: "Flexible splits",
-    f_splits_desc: "Equal \u00b7 exact \u00b7 % \u00b7 multi-payer.",
+    f_splits_desc: "Equal · exact · shares · multi-payer.",
     f_analytics_title: "Analytics",
-    f_analytics_desc: "Categories, trends, insights.",
+    f_analytics_desc: "Categories, trends, insights · Pro.",
     f_push_title: "Push alerts",
     f_push_desc: "New expense, settle, budget.",
     f_export_title: "Export",
-    f_export_desc: "PDF / Excel \u00b7 localized.",
+    f_export_desc: "PDF / Excel · Pro.",
     f_offline_mini: "Waiting to sync",
     f_push_mini: "Alla added €80",
     how_eyebrow: "30 seconds, 4 steps",
     how_title: "From install to settled",
     s1_title: "Install",
-    s1_desc: "TestFlight, 30 seconds.",
+    s1_desc: "App Store, 30 seconds.",
     s2_title: "Create group",
     s2_desc: "Name it. Share invite link.",
     s3_title: "Add expenses",
@@ -1101,23 +1073,19 @@ const T = {
     faq_eyebrow: "FAQ",
     faq_title: "Questions, answered.",
     faq1_q: "What costs money?",
-    faq1_a: "Nothing you need in order to split a bill. Groups, members, expenses, currencies, offline mode and export are unlimited and free, and there are no ads. Only AI input is metered: 5 voice entries and 3 receipt scans a month. Pro removes that limit.",
-    faq2_q: "Android version?",
-    faq2_a: "Coming after we polish the iOS beta. Join Discord to get notified.",
+    faq1_a: "Nothing you need in order to split a bill. Groups, members, expenses, currencies, manual entry and offline use are free, and there are no ads. Pro covers AI input past 5 voice entries and 3 receipt scans a month, plus analytics charts, group budgets and PDF or Excel export.",
     faq3_q: "How does voice input work without internet?",
     faq3_a: "It doesn’t — voice and scanning send the audio or photo to AI services, so they need a connection. Speech is transcribed by OpenAI Whisper and understood by Google Gemini. Manual entry works fully offline; everything syncs once you’re back online.",
     faq4_q: "Do you sell my data?",
     faq4_a: "No. We don\u2019t have ads, we don\u2019t sell data, and your expenses stay in your group. End of story.",
     faq5_q: "What if AI gets the receipt wrong?",
     faq5_a: "You can edit any field. Low-confidence items are highlighted so you know what to double-check.",
-    faq6_q: "Can I leave the beta?",
-    faq6_a: "Anytime. Export your data as PDF or Excel before you go.",
+    faq6_q: "Can I get my data out?",
+    faq6_a: "Yes. Pro exports your expenses, settlements and balances as PDF or Excel.",
     cta_title: 'Start <span style="color:var(--green);">splitting.</span>',
     cta_sub: "No ads. No data sold. Just an app that does the math.",
-    cta_btn: "Join TestFlight beta",
-    copy_btn: "Copy",
+    cta_btn: "Download on the App Store",
     cta_android: "Android \u2014 write to us and we'll send you a build:",
-    copied: "Copied!",
     footer_text: "Ceru © 2026 · React Native · Expo · Supabase",
     footer_privacy: "Privacy",
     footer_terms: "Terms",
@@ -1131,10 +1099,10 @@ const T = {
     nav_faq: "FAQ",
     nav_cta: "\u0421\u043a\u0430\u0447\u0430\u0442\u044c",
     nav_menu: "\u041c\u0435\u043d\u044e",
-    hero_pill: "Beta \u00b7 6 \u044f\u0437\u044b\u043a\u043e\u0432 \u00b7 iOS \u0438 Android",
+    hero_pill: "6 языков · iOS",
     hero_title: '\u0414\u0435\u043b\u0438 \u0440\u0430\u0441\u0445\u043e\u0434\u044b.<br>\u041d\u0435 <span class="accent">\u0434\u0440\u0443\u0436\u0431\u0443.</span>',
     hero_sub: "ИИ разделит счёт за ужин, расходы на поездку, аренду — голосом или фото. Без рекламы, офлайн, шесть языков. Для групп, которые реально путешествуют вместе.",
-    hero_cta: "\u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0432 TestFlight",
+    hero_cta: "Скачать в App Store",
     hero_cta2: "\u041a\u0430\u043a \u044d\u0442\u043e \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442",
     hero_cta3: "Android",
     stat_lang: "\u042f\u0437\u044b\u043a\u043e\u0432",
@@ -1158,19 +1126,19 @@ const T = {
     f_currency_title: "\u041c\u0443\u043b\u044c\u0442\u0438\u0432\u0430\u043b\u044e\u0442\u0430",
     f_currency_desc: "\u041a\u0443\u0440\u0441\u044b \u043e\u043d\u043b\u0430\u0439\u043d, \u0430\u0432\u0442\u043e-\u043a\u043e\u043d\u0432\u0435\u0440\u0442\u0430\u0446\u0438\u044f.",
     f_splits_title: "\u0413\u0438\u0431\u043a\u043e\u0435 \u0440\u0430\u0437\u0434\u0435\u043b\u0435\u043d\u0438\u0435",
-    f_splits_desc: "\u041f\u043e\u0440\u043e\u0432\u043d\u0443 \u00b7 \u0442\u043e\u0447\u043d\u043e \u00b7 % \u00b7 \u043d\u0435\u0441\u043a\u043e\u043b\u044c\u043a\u043e \u043f\u043b\u0430\u0442\u0435\u043b\u044c\u0449\u0438\u043a\u043e\u0432.",
+    f_splits_desc: "Поровну · точно · доли · несколько плательщиков.",
     f_analytics_title: "\u0410\u043d\u0430\u043b\u0438\u0442\u0438\u043a\u0430",
-    f_analytics_desc: "\u041a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u0438, \u0442\u0440\u0435\u043d\u0434\u044b, \u0438\u043d\u0441\u0430\u0439\u0442\u044b.",
+    f_analytics_desc: "Категории, тренды, инсайты · Pro.",
     f_push_title: "\u0423\u0432\u0435\u0434\u043e\u043c\u043b\u0435\u043d\u0438\u044f",
     f_push_desc: "\u041d\u043e\u0432\u044b\u0439 \u0440\u0430\u0441\u0445\u043e\u0434, \u043e\u043f\u043b\u0430\u0442\u0430, \u0431\u044e\u0434\u0436\u0435\u0442.",
     f_export_title: "\u042d\u043a\u0441\u043f\u043e\u0440\u0442",
-    f_export_desc: "PDF / Excel \u00b7 \u043b\u043e\u043a\u0430\u043b\u0438\u0437\u043e\u0432\u0430\u043d.",
+    f_export_desc: "PDF / Excel · Pro.",
     f_offline_mini: "\u0416\u0434\u0451\u0442 \u0441\u0435\u0442\u0438",
     f_push_mini: "\u0410\u043b\u043b\u0430 \u0434\u043e\u0431\u0430\u0432\u0438\u043b\u0430 \u20ac80",
     how_eyebrow: "30 \u0441\u0435\u043a\u0443\u043d\u0434, 4 \u0448\u0430\u0433\u0430",
     how_title: "\u041e\u0442 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043a\u0438 \u0434\u043e \u0440\u0430\u0441\u0447\u0451\u0442\u0430",
     s1_title: "\u0423\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u0435",
-    s1_desc: "TestFlight, 30 \u0441\u0435\u043a\u0443\u043d\u0434.",
+    s1_desc: "App Store, 30 секунд.",
     s2_title: "\u0421\u043e\u0437\u0434\u0430\u0439\u0442\u0435 \u0433\u0440\u0443\u043f\u043f\u0443",
     s2_desc: "\u041d\u0430\u0437\u043e\u0432\u0438\u0442\u0435. \u041f\u043e\u0434\u0435\u043b\u0438\u0442\u0435\u0441\u044c \u0441\u0441\u044b\u043b\u043a\u043e\u0439.",
     s3_title: "\u0414\u043e\u0431\u0430\u0432\u044c\u0442\u0435 \u0440\u0430\u0441\u0445\u043e\u0434\u044b",
@@ -1189,23 +1157,19 @@ const T = {
     faq_eyebrow: "\u0427\u0430\u0441\u0442\u044b\u0435 \u0432\u043e\u043f\u0440\u043e\u0441\u044b",
     faq_title: "\u0412\u043e\u043f\u0440\u043e\u0441\u044b \u0438 \u043e\u0442\u0432\u0435\u0442\u044b.",
     faq1_q: "За что надо платить?",
-    faq1_a: "Ни за что из того, что нужно, чтобы поделить счёт. Группы, участники, расходы, валюты, офлайн и выгрузка — без ограничений и бесплатно, рекламы нет. Ограничен только ИИ-ввод: 5 голосовых записей и 3 скана чеков в месяц. Pro снимает этот лимит.",
-    faq2_q: "\u0412\u0435\u0440\u0441\u0438\u044f \u0434\u043b\u044f Android?",
-    faq2_a: "\u041f\u043e\u0441\u043b\u0435 \u043f\u043e\u043b\u0438\u0440\u043e\u0432\u043a\u0438 iOS-\u0431\u0435\u0442\u044b. \u041f\u0440\u0438\u0441\u043e\u0435\u0434\u0438\u043d\u044f\u0439\u0442\u0435\u0441\u044c \u043a Discord \u0434\u043b\u044f \u043e\u043f\u043e\u0432\u0435\u0449\u0435\u043d\u0438\u0439.",
+    faq1_a: "Ни за что из того, что нужно, чтобы поделить счёт. Группы, участники, расходы, валюты, ручной ввод и офлайн — бесплатно, рекламы нет. Pro нужен для ИИ-ввода сверх 5 голосовых записей и 3 сканов чеков в месяц, а также для графиков аналитики, бюджетов группы и выгрузки в PDF или Excel.",
     faq3_q: "\u041a\u0430\u043a \u0433\u043e\u043b\u043e\u0441 \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u0431\u0435\u0437 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442\u0430?",
     faq3_a: "Никак — голос и сканирование отправляют запись или фото в сервисы ИИ, поэтому нужна связь. Речь расшифровывает OpenAI Whisper, смысл разбирает Google Gemini. Ручной ввод работает полностью офлайн, всё синхронизируется при подключении.",
     faq4_q: "\u0412\u044b \u043f\u0440\u043e\u0434\u0430\u0451\u0442\u0435 \u043c\u043e\u0438 \u0434\u0430\u043d\u043d\u044b\u0435?",
     faq4_a: "\u041d\u0435\u0442. \u041d\u0435\u0442 \u0440\u0435\u043a\u043b\u0430\u043c\u044b, \u043d\u0435\u0442 \u043f\u0440\u043e\u0434\u0430\u0436\u0438 \u0434\u0430\u043d\u043d\u044b\u0445, \u0432\u0430\u0448\u0438 \u0440\u0430\u0441\u0445\u043e\u0434\u044b \u043e\u0441\u0442\u0430\u044e\u0442\u0441\u044f \u0432 \u0432\u0430\u0448\u0435\u0439 \u0433\u0440\u0443\u043f\u043f\u0435.",
     faq5_q: "\u0410 \u0435\u0441\u043b\u0438 \u0418\u0418 \u043e\u0448\u0438\u0431\u0451\u0442\u0441\u044f \u0441 \u0447\u0435\u043a\u043e\u043c?",
     faq5_a: "\u041b\u044e\u0431\u043e\u0435 \u043f\u043e\u043b\u0435 \u043c\u043e\u0436\u043d\u043e \u043e\u0442\u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c. \u041d\u0435\u0443\u0432\u0435\u0440\u0435\u043d\u043d\u044b\u0435 \u043f\u0443\u043d\u043a\u0442\u044b \u043f\u043e\u0434\u0441\u0432\u0435\u0447\u0438\u0432\u0430\u044e\u0442\u0441\u044f.",
-    faq6_q: "\u041c\u043e\u0436\u043d\u043e \u0432\u044b\u0439\u0442\u0438 \u0438\u0437 \u0431\u0435\u0442\u044b?",
-    faq6_a: "\u0412 \u043b\u044e\u0431\u043e\u0439 \u043c\u043e\u043c\u0435\u043d\u0442. \u042d\u043a\u0441\u043f\u043e\u0440\u0442\u0438\u0440\u0443\u0439\u0442\u0435 \u0434\u0430\u043d\u043d\u044b\u0435 \u0432 PDF \u0438\u043b\u0438 Excel \u043f\u0435\u0440\u0435\u0434 \u0443\u0445\u043e\u0434\u043e\u043c.",
+    faq6_q: "Можно забрать свои данные?",
+    faq6_a: "Да. В Pro расходы, погашения и балансы выгружаются в PDF или Excel.",
     cta_title: '\u041d\u0430\u0447\u043d\u0438 <span style="color:var(--green);">\u0434\u0435\u043b\u0438\u0442\u044c.</span>',
     cta_sub: "Без рекламы. Без продажи данных. Просто приложение, которое считает.",
-    cta_btn: "\u0421\u043a\u0430\u0447\u0430\u0442\u044c \u0432 TestFlight",
-    copy_btn: "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c",
+    cta_btn: "Скачать в App Store",
     cta_android: "Android \u2014 \u043d\u0430\u043f\u0438\u0448\u0438\u0442\u0435 \u043d\u0430\u043c, \u043f\u0440\u0438\u0448\u043b\u0451\u043c \u0441\u0431\u043e\u0440\u043a\u0443:",
-    copied: "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e!",
     footer_text: "Ceru © 2026 · React Native · Expo · Supabase",
     footer_privacy: "\u041a\u043e\u043d\u0444\u0438\u0434\u0435\u043d\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0441\u0442\u044c",
     footer_terms: "\u0423\u0441\u043b\u043e\u0432\u0438\u044f",
@@ -1219,10 +1183,10 @@ const T = {
     nav_faq: "FAQ",
     nav_cta: "\u05dc\u05d4\u05d5\u05e8\u05d3\u05d4",
     nav_menu: "\u05ea\u05e4\u05e8\u05d9\u05d8",
-    hero_pill: "Beta \u00b7 6 \u05e9\u05e4\u05d5\u05ea \u00b7 iOS \u05d5-Android",
+    hero_pill: "6 שפות · iOS",
     hero_title: '\u05de\u05d7\u05dc\u05e7\u05d9\u05dd \u05d4\u05d5\u05e6\u05d0\u05d5\u05ea.<br>\u05dc\u05d0 <span class="accent">\u05d7\u05d1\u05e8\u05d5\u05d9\u05d5\u05ea.</span>',
     hero_sub: "AI מחלק את חשבון הארוחה, הוצאות הטיול, השכירות — בקול או בצילום. בלי פרסומות, עובד אופליין, שש שפות. לקבוצות שבאמת נוסעות ביחד.",
-    hero_cta: "\u05d4\u05d5\u05e8\u05d3\u05d4 \u05de-TestFlight",
+    hero_cta: "הורדה מ-App Store",
     hero_cta2: "\u05d0\u05d9\u05da \u05d6\u05d4 \u05e2\u05d5\u05d1\u05d3",
     hero_cta3: "Android",
     stat_lang: "\u05e9\u05e4\u05d5\u05ea",
@@ -1246,19 +1210,19 @@ const T = {
     f_currency_title: "\u05e8\u05d1-\u05de\u05d8\u05d1\u05e2\u05d9",
     f_currency_desc: "\u05e9\u05e2\u05e8\u05d9\u05dd \u05d7\u05d9\u05d9\u05dd, \u05d4\u05de\u05e8\u05d4 \u05d0\u05d5\u05d8\u05d5\u05de\u05d8\u05d9\u05ea.",
     f_splits_title: "\u05d7\u05dc\u05d5\u05e7\u05d4 \u05d2\u05de\u05d9\u05e9\u05d4",
-    f_splits_desc: "\u05e9\u05d5\u05d5\u05d4 \u00b7 \u05de\u05d3\u05d5\u05d9\u05e7 \u00b7 % \u00b7 \u05de\u05e1\u05e4\u05e8 \u05de\u05e9\u05dc\u05de\u05d9\u05dd.",
+    f_splits_desc: "שווה · מדויק · חלקים · מספר משלמים.",
     f_analytics_title: "\u05d0\u05e0\u05dc\u05d9\u05d8\u05d9\u05e7\u05d4",
-    f_analytics_desc: "\u05e7\u05d8\u05d2\u05d5\u05e8\u05d9\u05d5\u05ea, \u05de\u05d2\u05de\u05d5\u05ea, \u05ea\u05d5\u05d1\u05e0\u05d5\u05ea.",
+    f_analytics_desc: "קטגוריות, מגמות, תובנות · Pro.",
     f_push_title: "\u05d4\u05ea\u05e8\u05d0\u05d5\u05ea",
     f_push_desc: "\u05d4\u05d5\u05e6\u05d0\u05d4 \u05d7\u05d3\u05e9\u05d4, \u05d4\u05e1\u05d3\u05e8, \u05ea\u05e7\u05e6\u05d9\u05d1.",
     f_export_title: "\u05d9\u05d9\u05e6\u05d5\u05d0",
-    f_export_desc: "PDF / Excel \u00b7 \u05de\u05ea\u05d5\u05e8\u05d2\u05dd.",
+    f_export_desc: "PDF / Excel · Pro.",
     f_offline_mini: "\u05de\u05de\u05ea\u05d9\u05df \u05dc\u05e1\u05e0\u05db\u05e8\u05d5\u05df",
     f_push_mini: "\u05d0\u05dc\u05d4 \u05d4\u05d5\u05e1\u05d9\u05e4\u05d4 \u20ac80",
     how_eyebrow: "30 \u05e9\u05e0\u05d9\u05d5\u05ea, 4 \u05e6\u05e2\u05d3\u05d9\u05dd",
     how_title: "\u05de\u05d4\u05ea\u05e7\u05e0\u05d4 \u05dc\u05d4\u05ea\u05d7\u05e9\u05d1\u05e0\u05d5\u05ea",
     s1_title: "\u05d4\u05ea\u05e7\u05d9\u05e0\u05d5",
-    s1_desc: "TestFlight, 30 \u05e9\u05e0\u05d9\u05d5\u05ea.",
+    s1_desc: "App Store, 30 שניות.",
     s2_title: "\u05e6\u05e8\u05d5 \u05e7\u05d1\u05d5\u05e6\u05d4",
     s2_desc: "\u05ea\u05e0\u05d5 \u05e9\u05dd. \u05e9\u05ea\u05e4\u05d5 \u05e7\u05d9\u05e9\u05d5\u05e8.",
     s3_title: "\u05d4\u05d5\u05e1\u05d9\u05e4\u05d5 \u05d4\u05d5\u05e6\u05d0\u05d5\u05ea",
@@ -1277,23 +1241,19 @@ const T = {
     faq_eyebrow: "\u05e9\u05d0\u05dc\u05d5\u05ea \u05e0\u05e4\u05d5\u05e6\u05d5\u05ea",
     faq_title: "\u05e9\u05d0\u05dc\u05d5\u05ea \u05d5\u05ea\u05e9\u05d5\u05d1\u05d5\u05ea.",
     faq1_q: "על מה משלמים?",
-    faq1_a: "על כלום ממה שצריך כדי לחלק חשבון. קבוצות, משתתפים, הוצאות, מטבעות, מצב אופליין וייצוא — ללא הגבלה וללא תשלום, ובלי פרסומות. רק הזנת ה-AI מוגבלת: 5 הקלטות קוליות ו-3 סריקות קבלה בחודש. Pro מסיר את המגבלה.",
-    faq2_q: "\u05d2\u05e8\u05e1\u05ea Android?",
-    faq2_a: "\u05d0\u05d7\u05e8\u05d9 \u05e9\u05e0\u05dc\u05d8\u05e9 \u05d0\u05ea \u05d4\u05d1\u05d8\u05d0 \u05dc-iOS. \u05d4\u05e6\u05d8\u05e8\u05e4\u05d5 \u05dc-Discord \u05dc\u05e2\u05d3\u05db\u05d5\u05e0\u05d9\u05dd.",
+    faq1_a: "על כלום ממה שצריך כדי לחלק חשבון. קבוצות, משתתפים, הוצאות, מטבעות, הזנה ידנית ומצב אופליין — ללא תשלום, ובלי פרסומות. Pro נדרש להזנת AI מעבר ל-5 הקלטות קוליות ו-3 סריקות קבלה בחודש, וכן לגרפים של אנליטיקה, תקציבי קבוצה וייצוא ל-PDF או Excel.",
     faq3_q: "\u05d0\u05d9\u05da \u05e7\u05dc\u05d8 \u05e7\u05d5\u05dc\u05d9 \u05e2\u05d5\u05d1\u05d3 \u05d1\u05dc\u05d9 \u05d0\u05d9\u05e0\u05d8\u05e8\u05e0\u05d8?",
     faq3_a: "לא עובד — קול וסריקה שולחים את ההקלטה או התמונה לשירותי AI, ולכן דרוש חיבור. הדיבור מתומלל על ידי OpenAI Whisper והמשמעות מפוענחת על ידי Google Gemini. הזנה ידנית עובדת אופליין לגמרי; הכול מסתנכרן בחזרה לרשת.",
     faq4_q: "\u05d0\u05ea\u05dd \u05de\u05d5\u05db\u05e8\u05d9\u05dd \u05d0\u05ea \u05d4\u05de\u05d9\u05d3\u05e2 \u05e9\u05dc\u05d9?",
     faq4_a: "\u05dc\u05d0. \u05d0\u05d9\u05df \u05e4\u05e8\u05e1\u05d5\u05de\u05d5\u05ea, \u05d0\u05d9\u05df \u05de\u05db\u05d9\u05e8\u05ea \u05de\u05d9\u05d3\u05e2, \u05d4\u05d4\u05d5\u05e6\u05d0\u05d5\u05ea \u05e9\u05dc\u05db\u05dd \u05e0\u05e9\u05d0\u05e8\u05d5\u05ea \u05d1\u05e7\u05d1\u05d5\u05e6\u05d4.",
     faq5_q: "\u05de\u05d4 \u05d0\u05dd AI \u05d8\u05d5\u05e2\u05d4 \u05d1\u05e7\u05d1\u05dc\u05d4?",
     faq5_a: "\u05d0\u05e4\u05e9\u05e8 \u05dc\u05e2\u05e8\u05d5\u05da \u05db\u05dc \u05e9\u05d3\u05d4. \u05e4\u05e8\u05d9\u05d8\u05d9\u05dd \u05dc\u05d0 \u05d1\u05d8\u05d5\u05d7\u05d9\u05dd \u05de\u05e1\u05d5\u05de\u05e0\u05d9\u05dd.",
-    faq6_q: "\u05d0\u05e4\u05e9\u05e8 \u05dc\u05e2\u05d6\u05d5\u05d1 \u05d0\u05ea \u05d4\u05d1\u05d8\u05d0?",
-    faq6_a: "\u05d1\u05db\u05dc \u05e8\u05d2\u05e2. \u05d9\u05d9\u05e6\u05d0\u05d5 \u05d0\u05ea \u05d4\u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u05dc-PDF \u05d0\u05d5 Excel \u05dc\u05e4\u05e0\u05d9 \u05e9\u05e2\u05d5\u05d6\u05d1\u05d9\u05dd.",
+    faq6_q: "אפשר לייצא את הנתונים?",
+    faq6_a: "כן. ב-Pro אפשר לייצא הוצאות, התחשבנויות ויתרות ל-PDF או Excel.",
     cta_title: '\u05d4\u05ea\u05d7\u05d9\u05dc\u05d5 <span style="color:var(--green);">\u05dc\u05d7\u05dc\u05e7.</span>',
     cta_sub: "בלי פרסומות. בלי מכירת מידע. פשוט אפליקציה שעושה את החשבון.",
-    cta_btn: "\u05d4\u05d5\u05e8\u05d3\u05d4 \u05de-TestFlight",
-    copy_btn: "\u05d4\u05e2\u05ea\u05e7",
+    cta_btn: "הורדה מ-App Store",
     cta_android: "Android \u2014 \u05db\u05ea\u05d1\u05d5 \u05dc\u05e0\u05d5 \u05d5\u05e0\u05e9\u05dc\u05d7 \u05d2\u05e8\u05e1\u05d4:",
-    copied: "\u05d4\u05d5\u05e2\u05ea\u05e7!",
     footer_text: "Ceru © 2026 · React Native · Expo · Supabase",
     footer_privacy: "\u05e4\u05e8\u05d8\u05d9\u05d5\u05ea",
     footer_terms: "\u05ea\u05e0\u05d0\u05d9\u05dd",
@@ -1373,17 +1333,6 @@ if (wideScreen.addEventListener) {
 window.addEventListener("resize", function() {
   if (window.innerWidth > 980) closeMenu();
 });
-
-function copyLink(btn) {
-  navigator.clipboard.writeText("https://testflight.apple.com/join/HBdzGyGA").then(function() {
-    btn.textContent = T[curLang].copied;
-    btn.classList.add("copied");
-    setTimeout(function() {
-      btn.textContent = T[curLang].copy_btn;
-      btn.classList.remove("copied");
-    }, 2000);
-  });
-}
 
 var observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {

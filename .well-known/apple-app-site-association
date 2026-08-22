@@ -2,7 +2,9 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["2X5NZ5572C.com.splitai.app"],
+        "appIDs": [
+          "2X5NZ5572C.com.splitai.app"
+        ],
         "components": [
           {
             "/": "/join",
@@ -11,6 +13,10 @@
           {
             "/": "/join/*",
             "comment": "Invite link with the code in the path, which is what the app builds once EXPO_PUBLIC_APP_LINK_DOMAIN is set"
+          },
+          {
+            "/": "/invite/*",
+            "comment": "Named-guest invite, which the app builds directly once EXPO_PUBLIC_APP_LINK_DOMAIN is set"
           }
         ]
       }

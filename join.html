@@ -104,18 +104,48 @@
   </div>
 
   <script>
-    // Two shapes reach this page: /join?code=CODE, which the join edge function
-    // redirects to, and /join/CODE, which the app builds directly as a universal
-    // link once EXPO_PUBLIC_APP_LINK_DOMAIN is set. Accept either.
+    // Four shapes reach this page, two per invite kind.
+    //
+    // A group code:  /join/CODE            built by the app as a universal link
+    //                /join?code=CODE       the join edge function's redirect
+    // A guest token: /invite/TOKEN         built by the app as a universal link
+    //                /join?invite=TOKEN    the join edge function's redirect
+    //
+    // The two carry different payloads and open different deep links. A guest
+    // token is a signed JWT, so it keeps its dots, dashes and underscores — the
+    // group code's alphanumeric strip would destroy it.
     var params = new URLSearchParams(window.location.search);
-    var raw = params.get('code');
-    if (!raw) {
-      var seg = window.location.pathname.split('/').filter(Boolean);
-      if (seg.length > 1 && seg[0] === 'join') raw = seg[seg.length - 1];
+    var seg = window.location.pathname.split('/').filter(Boolean);
+
+    var token = params.get('invite');
+    if (!token && seg.length > 1 && seg[0] === 'invite') {
+      token = decodeURIComponent(seg[seg.length - 1]);
     }
+
+    var raw = params.get('code');
+    if (!raw && seg.length > 1 && seg[0] === 'join') raw = seg[seg.length - 1];
     var code = (raw || '').replace(/[^a-zA-Z0-9]/g, '');
 
-    if (code.length >= 8) {
+    if (token && /^[A-Za-z0-9._~+/-]+=*$/.test(token)) {
+      var deepLink = 'splitai://invite/' + encodeURIComponent(token);
+      // The token is a credential, not something to put on screen for a
+      // bystander to read or a screenshot to carry.
+      document.getElementById('codeDisplay').textContent = 'Personal invite';
+      document.getElementById('openApp').href = deepLink;
+
+      document.getElementById('openApp').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.href = deepLink;
+        setTimeout(function() {
+          document.getElementById('fallback').style.display = 'block';
+        }, 2000);
+      });
+
+      window.location.href = deepLink;
+      setTimeout(function() {
+        document.getElementById('fallback').style.display = 'block';
+      }, 2500);
+    } else if (code.length >= 8) {
       var deepLink = 'splitai://join/' + code;
       var formatted = code.slice(0, 4) + '\u00a0' + code.slice(4, 8) + '\u00a0' + code.slice(8);
       document.getElementById('codeDisplay').textContent = formatted;

@@ -7,6 +7,10 @@
     {
       "source": "/join/:code",
       "destination": "/join.html"
+    },
+    {
+      "source": "/invite/:token",
+      "destination": "/join.html"
     }
   ],
   "headers": [

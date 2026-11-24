@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.splitai.app",
+      "sha256_cert_fingerprints": [
+        "90:1F:8F:DE:1A:8B:8F:52:99:8A:56:CB:F2:C2:82:33:2B:FB:87:74:63:8A:BE:AD:25:0A:36:38:70:3F:62:D6"
+      ]
+    }
+  }
+]
